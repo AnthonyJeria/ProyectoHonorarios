@@ -17,7 +17,8 @@ class Usuario(models.Model):
 class CeCo(models.Model):
     num_CeCo = models.IntegerField()
     nombre_CeCo = models.IntegerField()
-    anno_contable = models.IntegerField()
+    fecha_inicio = models.DateField(default= '01012024')
+    fecha_fin = models.DateField(default= '01012024')
 
 class escuela(models.Model):
     id_escuela = models.CharField(max_length=20)
@@ -46,6 +47,5 @@ class documento(models.Model):
     detalle_boleta = models.CharField(max_length=500)
     detalle_analista = models.CharField(max_length=500)
     CeCo = models.IntegerField()
-    escuela = models.IntegerField()
 
 
