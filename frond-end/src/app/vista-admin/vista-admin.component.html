@@ -21,52 +21,52 @@
             <form>
                 <div class="form-group">
                     <label >Rut</label>
-                    <input type="text" [(ngModel)]="rut" [ngModelOptions]="{standalone: true}"  class="form-control" id="userut" name="userut" placeholder="Enter Name">
+                    <input type="text" [(ngModel)]="rut" [ngModelOptions]="{standalone: true}" class="form-control" id="userut" name="userut">
                 </div>
 
                 <div class="form-group">
                     <label >DV</label>
-                    <input type="text"     class="form-control" id="userDV" name="userDV" placeholder="Enter Name">
+                    <input type="text" [(ngModel)]="DV" [ngModelOptions]="{standalone: true}" class="form-control" id="userDV" name="userDV">
                 </div>
 
                 <div class="form-group">
                     <label >nombre</label>
-                    <input type="text"    class="form-control" id="usernombre" name="usernombre" placeholder="Enter Name">
+                    <input type="text" [(ngModel)]="nombre" [ngModelOptions]="{standalone: true}" class="form-control" id="usernombre" name="usernombre">
                 </div>
 
                 <div class="form-group">
                     <label >apellido1</label>
-                    <input type="text"    class="form-control" id="userapellido1" name="userapellido1" placeholder="Enter Name">
+                    <input type="text" [(ngModel)]="apellido1" [ngModelOptions]="{standalone: true}" class="form-control" id="userapellido1" name="userapellido1">
                 </div>
 
                 <div class="form-group">
                     <label >apellido2</label>
-                    <input type="text"     class="form-control" id="userapellido2" name="userapellido2" placeholder="Enter Name">
+                    <input type="text" [(ngModel)]="apellido2" [ngModelOptions]="{standalone: true}" class="form-control" id="userapellido2" name="userapellido2">
                 </div>
 
                 <div class="form-group">
                     <label >nombre_usuario</label>
-                    <input type="text"   class="form-control" id="usernombre_usuario" name="usernombre_usuario" placeholder="Enter Name">
+                    <input type="text" [(ngModel)]="nombre_usuario" [ngModelOptions]="{standalone: true}" class="form-control" id="usernombre_usuario" name="usernombre_usuario">
                 </div>
 
                 <div class="form-group">
                     <label >correo</label>
-                    <input type="text"     class="form-control" id="usercorreo" name="usercorreo" placeholder="Enter Name">
+                    <input type="text" [(ngModel)]="correo" [ngModelOptions]="{standalone: true}" class="form-control" id="usercorreo" name="usercorreo">
                 </div>
 
                 <div class="form-group">
                     <label >clave</label>
-                    <input type="text"     class="form-control" id="userclave" name="userclave" placeholder="Enter Name">
+                    <input type="text" [(ngModel)]="clave" [ngModelOptions]="{standalone: true}" class="form-control" id="userclave" name="userclave">
                 </div>
 
                 <div class="form-group">
                     <label >id_tipo_usuario</label>
-                    <input type="text"     class="form-control" id="userid_tipo_usuario" name="userid_tipo_usuario" placeholder="Enter Name">
+                    <input type="text" [(ngModel)]="id_tipo_usuario" [ngModelOptions]="{standalone: true}" class="form-control" id="userid_tipo_usuario" name="userid_tipo_usuario">
                 </div>
 
-                <button type="submit" class="btn btn-primary mt-4" (click)="saveRecords()" >Save</button> &nbsp;
+                <button type="submit" class="btn btn-primary mt-4" (click)="saveRecords()">Save</button> &nbsp;
 
-                <button type="submit" class="btn btn-warning mt-4" (click)="UpdateRecords()" >Update</button>
+                <button type="submit" class="btn btn-warning mt-4"  (click)="UpdateRecords()">Update</button>
 
             </form>
         </div>
@@ -74,7 +74,7 @@
 
     <div>
         <div class="container mt-4" >
-            <h1>Student Table</h1>
+            <h1>Lista de Usuarios</h1>
             <table class="table">
                 <thead>
                     <tr>

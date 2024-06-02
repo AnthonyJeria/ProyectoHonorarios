@@ -1,17 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-
 
 @Component({
   selector: 'app-vista-admin',
-  standalone: true,
-  imports: [],
   templateUrl: './vista-admin.component.html',
   styleUrl: './vista-admin.component.css'
 })
 export class VistaAdminComponent {
 
+  
   UserArray : any[] = [];
 
   rut: number = 0;
@@ -23,6 +20,9 @@ export class VistaAdminComponent {
   correo: string = "";
   clave: string = "";
   id_tipo_usuario: number = 0;
+
+  currentUsuarioID = "";
+
 
   constructor(private http: HttpClient )
   {
@@ -93,7 +93,7 @@ export class VistaAdminComponent {
     this.http.put("http://127.0.0.1:8000/usuario"+ this.rut , bodyData).subscribe((resultData: any)=>
     {
       console.log(resultData);
-      alert("Student Registered Updateddd")
+      alert("Usuario Registered Updated")
       this.DV = '';
       this.nombre ="";
       this.apellido1 = "";
@@ -109,7 +109,7 @@ export class VistaAdminComponent {
 
   setDelete(data: any)
   {
-    this.http.delete("http://127.0.0.1:8000/usuario"+ "/"+ data.id).subscribe((resultData: any)=>
+    this.http.delete("http://127.0.0.1:8000/usuario"+ "/"+ data.rut).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Usuario Eliminado")
