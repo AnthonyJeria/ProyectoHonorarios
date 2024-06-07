@@ -117,4 +117,9 @@ export class VistaAdminComponent {
     });
   }
 
+  ocultarUserAdmin()
+  {
+    
+  }
+
 }
