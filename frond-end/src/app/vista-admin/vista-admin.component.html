@@ -61,8 +61,8 @@
           </div>
         </nav>
         
-        <nav id="AgregarUser" class="col-md-3 col-lg-10 d-md-block sidebar collapse">
-          <div>
+        <nav class="col-md-3 col-lg-10 d-md-block sidebar collapse">
+          <div id="divUser">
             <h1>Agregar Usuario</h1>
             <div class="card">
                 <form>
@@ -119,7 +119,7 @@
             </div>
           </div>
     
-          <div>
+          <div id="divUser2">
             <div>
                 <h1>Lista de Usuarios</h1>
                 <table class="table">
@@ -162,8 +162,75 @@
                 </table>
             </div>
           </div>
-        </nav>
 
+          
+          <div id="divCeCo" >
+            <h1>Agregar Centro de Costo</h1>
+            <div class="card">
+                <form>
+                    <div class="form-group">
+                        <label >Numero Centro de Costo</label>
+                        <input type="text" [(ngModel)]="numCeCo" [ngModelOptions]="{standalone: true}" class="form-control" id="ceconum" name="ceconum">
+                    </div>
+
+                    <div class="form-group">
+                      <label >Nombre Centro de Costo</label>
+                      <input type="text" [(ngModel)]="nombreCeCo" [ngModelOptions]="{standalone: true}" class="form-control" id="ceconom" name="ceconom">
+                    </div>
+
+                    <div class="form-group">
+                      <label >Fecha de Inicio</label>
+                      <input type="text" [(ngModel)]="fecha_inicio" [ngModelOptions]="{standalone: true}" class="form-control" id="cecofechaI" name="cecofechaI">
+                    </div>
+
+                    <div class="form-group">
+                      <label >Fecha de Termino</label>
+                      <input type="text" [(ngModel)]="fecha_fin" [ngModelOptions]="{standalone: true}" class="form-control" id="ceconum" name="ceconum">
+                    </div>
+    
+                    <button type="submit" class="btn btn-primary mt-4" (click)="saveRecordsCeCo()">Save</button> &nbsp;
+    
+                    <button type="submit" class="btn btn-warning mt-4"  (click)="UpdateRecordsCeCo()">Update</button>
+    
+                </form>
+            </div>
+          </div>
+    
+          <div id="divCeCo2">
+            <div>
+                <h1>Lista de Centros de Costos</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">numCeCo</th>
+                            <th scope="col">nombreCeCo</th>
+                            <th scope="col">fecha_inicio</th>
+                            <th scope="col">fecha_fin</th>
+
+                        </tr>
+                    </thead>
+    
+                    <tbody>
+                        <tr *ngFor="let CeCoItem of CeCoArray">
+    
+                            <td>{{CeCoItem.numCeCo}}</td>
+                            <td>{{CeCoItem.nombreCeCo}}</td>
+                            <td>{{CeCoItem.fecha_inicio}}</td>
+                            <td>{{CeCoItem.fecha_fin}}</td>
+    
+                            <td>
+                                <button type="button" class="btn btn-success" (click)="setUpdateCeCo(CeCoItem)">Edit</button>
+    
+                                <button type="button" class="btn btn-danger" (click)="setDeleteCeCo(CeCoItem)">Delete</button>
+    
+                            </td>
+                        </tr>
+                    </tbody>
+    
+                </table>
+            </div>
+          </div>
+        </nav>
       </div>
     </div>
 

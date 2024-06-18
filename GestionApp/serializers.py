@@ -11,7 +11,7 @@ class Tipo_usuarioSerializer(serializers.ModelSerializer):
         model = Tipo_usuario
         fields = '__all__'  
 
-class CeCo(serializers.ModelSerializer):
+class CeCoSerializer(serializers.ModelSerializer):
     class Meta:
         model = CeCo
         fields = '__all__'  

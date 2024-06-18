@@ -23,10 +23,19 @@ export class VistaAdminComponent {
 
   currentUsuarioID = "";
 
+  CeCoArray : any[] = [];
+
+  numCeCo: number = 0;
+  nombreCeCo: string = "";
+  fecha_inicio: string = "";
+  fecha_fin: string = "";
+
+  currentCeCoID = "";
 
   constructor(private http: HttpClient )
   {
     this.getAllUser();
+    this.getAllCeCo();
   }
 
   saveRecords()
@@ -119,7 +128,93 @@ export class VistaAdminComponent {
 
   ocultarUserAdmin()
   {
-    
+    const navElement = document.getElementById('divUser');
+    if (navElement) {
+      navElement.style.display = 'none';
+    }
+    const navElement2 = document.getElementById('divUser2');
+    if (navElement2) {
+      navElement2.style.display = 'none';
+    }
   }
 
+  ocultarCeco()
+  {
+    const navElement = document.getElementById('divCeCo');
+    if (navElement) {
+      navElement.style.display = 'none';
+    }
+    const navElement2 = document.getElementById('divCeCo2');
+    if (navElement2) {
+      navElement2.style.display = 'none';
+    }
+  }
+
+  saveRecordsCeCo()
+  {
+    let bodyData = {
+      "numCeCo" : this.numCeCo,
+      "nombreCeCo" : this.nombreCeCo,
+      "fecha_inicio" : this.fecha_inicio,
+      "fecha_fin" : this.fecha_fin,
+    }
+
+    this.http.post("http://127.0.0.1:8000/ceco",bodyData).subscribe((resultData: any)=>
+    {
+      console.log(resultData);
+      alert("Cetro de Costo Registrado Correctamente");
+      this.getAllCeCo();
+    });
+  }
+
+  getAllCeCo()
+  {
+    this.http.get("http://127.0.0.1:8000/ceco")
+    .subscribe((resultData: any)=>
+    {
+      console.log(resultData);
+      this.CeCoArray = resultData;
+    });
+  }
+
+  setUpdateCeCo(data: any)
+  {
+    this.numCeCo = data.numCeCo;
+    this.nombreCeCo = data.nombreCeCo;
+    this.fecha_inicio = data.fecha_inicio;
+    this.fecha_fin = data.fecha_fin;
+  }
+
+  UpdateRecordsCeCo()
+  {
+    let bodyData = 
+    {
+      "numCeCo" : this.numCeCo,
+      "nombreCeCo" : this.nombreCeCo,
+      "fecha_inicio" : this.fecha_inicio,
+      "fecha_fin" : this.fecha_fin,
+    };
+
+    this.http.put("http://127.0.0.1:8000/ceco"+ this.numCeCo , bodyData).subscribe((resultData: any)=>
+    {
+      console.log(resultData);
+      alert("Centro de Costo Registered Updated")
+      this.numCeCo = 0;
+      this.nombreCeCo ="";
+      this.fecha_inicio = "";
+      this.fecha_fin = "";
+
+      this.getAllCeCo();
+    });
+  }
+
+  setDeleteCeCo(data: any)
+  {
+    this.http.delete("http://127.0.0.1:8000/ceco"+ "/"+ data.numCeCo).subscribe((resultData: any)=>
+    {
+      console.log(resultData);
+      alert("Centro de Costo Eliminado")
+      this.getAllCeCo();
+    });
+  }
 }
