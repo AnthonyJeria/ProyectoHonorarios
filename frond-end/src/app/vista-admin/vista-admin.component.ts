@@ -32,10 +32,31 @@ export class VistaAdminComponent {
 
   currentCeCoID = "";
 
+  PrestadorArray : any[] = [];
+
+  rutPrestador: number = 0;
+  DVPrestador: string = "";
+  nombrePrestador: string = "";
+  apellido1Prestador: string = "";
+  apellido2Prestador: string = "";
+  correoPrestador: string = "";
+  id_banco: number = 0;
+  tipo_cuenta: string = "";
+  numero_cuenta: number = 0;
+
+  currentPrestadorID = "";
+
   constructor(private http: HttpClient )
   {
     this.getAllUser();
     this.getAllCeCo();
+    this.getAllPrestador();
+  }
+
+  ngOnInit(): void {
+    this.ocultarUserAdmin();
+    this.ocultarCeco();
+    this.ocultarPrestador();
   }
 
   saveRecords()
@@ -138,6 +159,21 @@ export class VistaAdminComponent {
     }
   }
 
+  mostrarUserAdmin()
+  {
+    const navElement = document.getElementById('divUser');
+    if (navElement) {
+      navElement.style.display = 'block';
+    }
+    const navElement2 = document.getElementById('divUser2');
+    if (navElement2) {
+      navElement2.style.display = 'block';
+    }
+
+    this.ocultarCeco()
+    this.ocultarPrestador();
+  }
+
   ocultarCeco()
   {
     const navElement = document.getElementById('divCeCo');
@@ -148,6 +184,109 @@ export class VistaAdminComponent {
     if (navElement2) {
       navElement2.style.display = 'none';
     }
+  }
+
+  mostrarCeco()
+  {
+    const navElement = document.getElementById('divCeCo');
+    if (navElement) {
+      navElement.style.display = 'block';
+    }
+    const navElement2 = document.getElementById('divCeCo2');
+    if (navElement2) {
+      navElement2.style.display = 'block';
+    }
+
+    this.ocultarUserAdmin()
+    this.ocultarPrestador();
+  }
+
+  saveRecordsPrestador()
+  {
+    let bodyData = {
+      "rutPrestador" : this.rutPrestador,
+      "DVPrestador" : this.DVPrestador,
+      "nombrePrestador" : this.nombrePrestador,
+      "apellido1Prestador" : this.apellido1Prestador,
+      "apellido2Prestador" : this.apellido2Prestador,
+      "correoPrestador" : this.correoPrestador,
+      "id_banco" : this.id_banco,
+      "tipo_cuenta" : this.tipo_cuenta,
+      "numero_cuenta" : this.numero_cuenta,
+    }
+
+    this.http.post("http://127.0.0.1:8000/prestadorservicios",bodyData).subscribe((resultData: any)=>
+    {
+      console.log(resultData);
+      alert("Prestador de Sevicios Registrado Correctamente");
+      this.getAllPrestador();
+    });
+  }
+
+  getAllPrestador()
+  {
+    this.http.get("http://127.0.0.1:8000/prestadorservicios")
+    .subscribe((resultData: any)=>
+    {
+      console.log(resultData);
+      this.PrestadorArray = resultData;
+    });
+  }
+
+  setUpdatePrestador(data: any)
+  {
+    this.rutPrestador = data.rutPrestador;
+    this.DVPrestador = data.DVPrestador;
+    this.nombrePrestador = data.nombrePrestador;
+    this.apellido1Prestador = data.apellido1Prestador;
+    this.apellido2Prestador = data.apellido2Prestador;
+    this.correoPrestador = data.correoPrestador;
+    this.id_banco = data.id_banco;
+    this.tipo_cuenta = data.tipo_cuenta;
+    this.numero_cuenta = data.numero_cuenta;
+    
+  }
+
+  UpdateRecordsPrestador()
+  {
+    let bodyData = 
+    {
+      "rutPrestador" : this.rutPrestador,
+      "DVPrestador" : this.DVPrestador,
+      "nombrePrestador" : this.nombrePrestador,
+      "apellido1Prestador" : this.apellido1Prestador,
+      "apellido2Prestador" : this.apellido2Prestador,
+      "correoPrestador" : this.correoPrestador,
+      "id_banco" : this.id_banco,
+      "tipo_cuenta" : this.tipo_cuenta,
+      "numero_cuenta" : this.numero_cuenta,
+    };
+
+    this.http.put("http://127.0.0.1:8000/prestadorservicios"+ this.rutPrestador , bodyData).subscribe((resultData: any)=>
+    {
+      console.log(resultData);
+      alert("Prestador de Servicios Registered Updated")
+      this.DVPrestador ="";
+      this.nombrePrestador = "";
+      this.apellido1Prestador = "";
+      this.apellido2Prestador = "";
+      this.correoPrestador = "";
+      this.id_banco = 0;
+      this.tipo_cuenta = "";
+      this.numero_cuenta = 0;
+
+      this.getAllPrestador();
+    });
+  }
+
+  setDeletePrestador(data: any)
+  {
+    this.http.delete("http://127.0.0.1:8000/prestadorservicios"+ "/"+ data.rutPrestador).subscribe((resultData: any)=>
+    {
+      console.log(resultData);
+      alert("Prestador de Servicios Eliminado")
+      this.getAllPrestador();
+    });
   }
 
   saveRecordsCeCo()
@@ -199,7 +338,6 @@ export class VistaAdminComponent {
     {
       console.log(resultData);
       alert("Centro de Costo Registered Updated")
-      this.numCeCo = 0;
       this.nombreCeCo ="";
       this.fecha_inicio = "";
       this.fecha_fin = "";
@@ -216,5 +354,32 @@ export class VistaAdminComponent {
       alert("Centro de Costo Eliminado")
       this.getAllCeCo();
     });
+  }
+
+  ocultarPrestador()
+  {
+    const navElement = document.getElementById('divPrestador');
+    if (navElement) {
+      navElement.style.display = 'none';
+    }
+    const navElement2 = document.getElementById('divPrestador2');
+    if (navElement2) {
+      navElement2.style.display = 'none';
+    }
+  }
+
+  mostrarPrestador()
+  {
+    const navElement = document.getElementById('divPrestador');
+    if (navElement) {
+      navElement.style.display = 'block';
+    }
+    const navElement2 = document.getElementById('divPrestador2');
+    if (navElement2) {
+      navElement2.style.display = 'block';
+    }
+
+    this.ocultarCeco();
+    this.ocultarUserAdmin();
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IUserLogin } from '../models/IUserLogin';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,15 +15,7 @@ export class LoginComponent {
     password: ''
   };
 
-  UserArray : any[] = [];
-
-  correo: string = "";
-  clave: string = "";
-  id_tipo_usuario: number = 0;
-
-  currentUsuarioID = "";
-
-  constructor(private http: HttpClient ){}
+  constructor(private http: HttpClient, private router: Router){}
 
   showAlert(message: string): void {
     alert(message);
@@ -35,17 +28,12 @@ export class LoginComponent {
       alert("Debe llenar todos los campos con informacion")
     }else{
       
-      this.http.get("http://127.0.0.1:8000/usuario")
-      .subscribe((resultData: any)=>
-      {
-        console.log(resultData);
-        this.UserArray = resultData;
-      });
-
-      const usuario = this.UserArray.filter(any => any.correo = userLoginInfo.email);
-      alert(userLoginInfo.email)
+      if((userLoginInfo.email == "anth.jeria@duocuc.cl") && (userLoginInfo.password =="admin1234")){
+        this.router.navigate(['admin']);
+      }else{
+        alert("Usuario o Contraseña Incorrectos")
+      }
 
     }
-
   }
 }

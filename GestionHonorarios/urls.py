@@ -27,5 +27,9 @@ urlpatterns = [
     url(r'^ceco$',views.cecoApi),
     url(r'^ceco/([0-9]+)$',views.cecoApi),
 
+    url(r'^prestadorservicios$',views.prestadorApi),
+    url(r'^prestadorservicios$',views.prestadorApi),
+    url(r'^prestadorservicios/([0-9]+)$',views.prestadorApi),
+
      path('admin/', admin.site.urls),
 ]

@@ -22,40 +22,34 @@
           <div class="sidebar-sticky pt-3">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="#">
+                <button class="nav-link active" (click)="mostrarUserAdmin()">
                   <span data-feather="home"></span>
                   Usuarios <span class="sr-only">(current)</span>
-                </a>
+                </button>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file"></span>
-                  Centros de Costos
-                </a>
+                <button class="nav-link active" (click)="mostrarCeco()">
+                  <span data-feather="home"></span>
+                  Centros de Costo <span class="sr-only">(current)</span>
+                </button>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <button class="nav-link" (click)="mostrarPrestador()">
                   <span data-feather="shopping-cart"></span>
-                  x
-                </a>
+                  Prestadores de Servicios
+                </button>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <button class="nav-link" href="#">
                   <span data-feather="users"></span>
-                  x
-                </a>
+                  Gestion de Boletas
+                </button>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <button class="nav-link" href="#">
                   <span data-feather="bar-chart-2"></span>
-                  x
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="layers"></span>
-                  x
-                </a>
+                  Generar Reporte
+                </button>
               </li>
             </ul>
           </div>
@@ -230,6 +224,109 @@
                 </table>
             </div>
           </div>
+
+          <div id="divPrestador" >
+            <h1>Agregar Prestadores de Servicios</h1>
+            <div class="card">
+                <form>
+                    <div class="form-group">
+                        <label >Rut</label>
+                        <input type="text" [(ngModel)]="rutPrestador" [ngModelOptions]="{standalone: true}" class="form-control" id="rutPrestador" name="rutPrestador">
+                    </div>
+
+                    <div class="form-group">
+                      <label >DV</label>
+                      <input type="text" [(ngModel)]="DVPrestador" [ngModelOptions]="{standalone: true}" class="form-control" id="DVPrestador" name="DVPrestador">
+                    </div>
+
+                    <div class="form-group">
+                      <label >Nombre</label>
+                      <input type="text" [(ngModel)]="nombrePrestador" [ngModelOptions]="{standalone: true}" class="form-control" id="nombrePrestador" name="nombrePrestador">
+                    </div>
+
+                    <div class="form-group">
+                      <label >Apellido1</label>
+                      <input type="text" [(ngModel)]="apellido1Prestador" [ngModelOptions]="{standalone: true}" class="form-control" id="apellido1Prestador" name="apellido1Prestador">
+                    </div>
+
+                    <div class="form-group">
+                      <label >Apellido2</label>
+                      <input type="text" [(ngModel)]="apellido2Prestador" [ngModelOptions]="{standalone: true}" class="form-control" id="apellido2Prestador" name="apellido2Prestador">
+                    </div>
+
+                    <div class="form-group">
+                      <label >Correo</label>
+                      <input type="text" [(ngModel)]="correoPrestador" [ngModelOptions]="{standalone: true}" class="form-control" id="correoPrestador" name="correoPrestador">
+                    </div>
+
+                    <div class="form-group">
+                      <label >Banco</label>
+                      <input type="text" [(ngModel)]="id_banco" [ngModelOptions]="{standalone: true}" class="form-control" id="id_banco" name="id_banco">
+                    </div>
+
+                    <div class="form-group">
+                      <label >tipo de Cuenta</label>
+                      <input type="text" [(ngModel)]="tipo_cuenta" [ngModelOptions]="{standalone: true}" class="form-control" id="tipo_cuenta" name="tipo_cuenta">
+                    </div>
+
+                    <div class="form-group">
+                      <label >Numero de Cuenta</label>
+                      <input type="text" [(ngModel)]="numero_cuenta" [ngModelOptions]="{standalone: true}" class="form-control" id="numero_cuenta" name="numero_cuenta">
+                    </div>
+    
+                    <button type="submit" class="btn btn-primary mt-4" (click)="saveRecordsPrestador()">Save</button> &nbsp;
+    
+                    <button type="submit" class="btn btn-warning mt-4"  (click)="UpdateRecordsPrestador()">Update</button>
+    
+                </form>
+            </div>
+          </div>
+    
+          <div id="divPrestador2">
+            <div>
+                <h1>Lista de Prestadores de Servicios</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">rutPrestador</th>
+                            <th scope="col">DVPrestador</th>
+                            <th scope="col">nombrePrestador</th>
+                            <th scope="col">apellido1Prestador</th>
+                            <th scope="col">apellido2Prestador</th>
+                            <th scope="col">correoPrestador</th>
+                            <th scope="col">id_banco</th>
+                            <th scope="col">tipo_cuenta</th>
+                            <th scope="col">numero_cuenta</th>
+
+                        </tr>
+                    </thead>
+    
+                    <tbody>
+                        <tr *ngFor="let PrestadorItem of PrestadorArray">
+    
+                            <td>{{PrestadorItem.rutPrestador}}</td>
+                            <td>{{PrestadorItem.DVPrestador}}</td>
+                            <td>{{PrestadorItem.nombrePrestador}}</td>
+                            <td>{{PrestadorItem.apellido1Prestador}}</td>
+                            <td>{{PrestadorItem.apellido2Prestador}}</td>
+                            <td>{{PrestadorItem.correoPrestador}}</td>
+                            <td>{{PrestadorItem.id_banco}}</td>
+                            <td>{{PrestadorItem.tipo_cuenta}}</td>
+                            <td>{{PrestadorItem.numero_cuenta}}</td>
+    
+                            <td>
+                                <button type="button" class="btn btn-success" (click)="setUpdatePrestador(PrestadorItem)">Edit</button>
+    
+                                <button type="button" class="btn btn-danger" (click)="setDeletePrestador(PrestadorItem)">Delete</button>
+    
+                            </td>
+                        </tr>
+                    </tbody>
+    
+                </table>
+            </div>
+          </div>
+
         </nav>
       </div>
     </div>
