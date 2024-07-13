@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from GestionApp.models import Tipo_usuario, Usuario, CeCo, prestadorServicios
+from GestionApp.models import Tipo_usuario, Usuario, CeCo, prestadorServicios, boleta
 
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,4 +19,9 @@ class CeCoSerializer(serializers.ModelSerializer):
 class prestadorServiciosSerializer(serializers.ModelSerializer):
     class Meta:
         model = prestadorServicios
+        fields = '__all__'
+
+class boletaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = boleta
         fields = '__all__'  

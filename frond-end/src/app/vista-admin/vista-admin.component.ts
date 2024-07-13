@@ -25,8 +25,8 @@ export class VistaAdminComponent {
 
   CeCoArray : any[] = [];
 
-  numCeCo: number = 0;
-  nombreCeCo: string = "";
+  num_CeCo: number = 0;
+  nombre_CeCo: string = "";
   fecha_inicio: string = "";
   fecha_fin: string = "";
 
@@ -46,17 +46,40 @@ export class VistaAdminComponent {
 
   currentPrestadorID = "";
 
+  BoletaArray : any[] = [];
+
+  rutPrest: number = 0;
+  DVPrest: string = "";
+  nombrePrest: string = "";
+  id_bancoPrest: number = 0;
+  numero_cuentaPrest: number = 0;
+  correoPrest: string = "";
+  numBoleta: string = "";
+  fechaBoleta: string = "";
+  nomBoletaAdjunta: string = "";
+  CeCo: number = 0;
+  nombreUser: string = "";
+  aprobacion1: number = 0;
+  aprobacion2: number = 0;
+  aprobacion3: number = 0;
+  aprobacion4: number = 0;
+  jefatura: number = 0;
+
+  currentBoletaID = "";
+
   constructor(private http: HttpClient )
   {
     this.getAllUser();
     this.getAllCeCo();
     this.getAllPrestador();
+    this.getAllBoletas();
   }
 
   ngOnInit(): void {
     this.ocultarUserAdmin();
     this.ocultarCeco();
     this.ocultarPrestador();
+    this.ocultarBoleta();
   }
 
   saveRecords()
@@ -172,6 +195,7 @@ export class VistaAdminComponent {
 
     this.ocultarCeco()
     this.ocultarPrestador();
+    this.ocultarBoleta();
   }
 
   ocultarCeco()
@@ -197,8 +221,9 @@ export class VistaAdminComponent {
       navElement2.style.display = 'block';
     }
 
-    this.ocultarUserAdmin()
+    this.ocultarUserAdmin();
     this.ocultarPrestador();
+    this.ocultarBoleta();
   }
 
   saveRecordsPrestador()
@@ -292,8 +317,8 @@ export class VistaAdminComponent {
   saveRecordsCeCo()
   {
     let bodyData = {
-      "numCeCo" : this.numCeCo,
-      "nombreCeCo" : this.nombreCeCo,
+      "num_CeCo" : this.num_CeCo,
+      "nombre_CeCo" : this.nombre_CeCo,
       "fecha_inicio" : this.fecha_inicio,
       "fecha_fin" : this.fecha_fin,
     }
@@ -318,8 +343,8 @@ export class VistaAdminComponent {
 
   setUpdateCeCo(data: any)
   {
-    this.numCeCo = data.numCeCo;
-    this.nombreCeCo = data.nombreCeCo;
+    this.num_CeCo = data.num_CeCo;
+    this.nombre_CeCo = data.nombre_CeCo;
     this.fecha_inicio = data.fecha_inicio;
     this.fecha_fin = data.fecha_fin;
   }
@@ -328,17 +353,17 @@ export class VistaAdminComponent {
   {
     let bodyData = 
     {
-      "numCeCo" : this.numCeCo,
-      "nombreCeCo" : this.nombreCeCo,
+      "num_CeCo" : this.num_CeCo,
+      "nombre_CeCo" : this.nombre_CeCo,
       "fecha_inicio" : this.fecha_inicio,
       "fecha_fin" : this.fecha_fin,
     };
 
-    this.http.put("http://127.0.0.1:8000/ceco"+ this.numCeCo , bodyData).subscribe((resultData: any)=>
+    this.http.put("http://127.0.0.1:8000/ceco"+ this.num_CeCo , bodyData).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Centro de Costo Registered Updated")
-      this.nombreCeCo ="";
+      this.nombre_CeCo ="";
       this.fecha_inicio = "";
       this.fecha_fin = "";
 
@@ -348,7 +373,7 @@ export class VistaAdminComponent {
 
   setDeleteCeCo(data: any)
   {
-    this.http.delete("http://127.0.0.1:8000/ceco"+ "/"+ data.numCeCo).subscribe((resultData: any)=>
+    this.http.delete("http://127.0.0.1:8000/ceco"+ "/"+ data.num_CeCo).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Centro de Costo Eliminado")
@@ -381,5 +406,151 @@ export class VistaAdminComponent {
 
     this.ocultarCeco();
     this.ocultarUserAdmin();
+    this.ocultarBoleta();
+  }
+
+  saveRecordsBoleta()
+  {
+    let bodyData = {
+      "rutPrest" : this.rutPrest,
+      "DVPrest" : this.DVPrest,
+      "nombrePrest" : this.nombrePrest,
+      "id_bancoPrest" : this.id_bancoPrest,
+      "numero_cuentaPrest" : this.numero_cuentaPrest,
+      "correoPrest" : this.correoPrest,
+      "numBoleta" : this.numBoleta,
+      "fechaBoleta" : this.fechaBoleta,
+      "nomBoletaAdjunta" : this.nomBoletaAdjunta,
+      "CeCo" : this.CeCo,
+      "nombreUser" : this.nombreUser,
+      "aprobacion1" : this.aprobacion1,
+      "aprobacion2" : this.aprobacion2,
+      "aprobacion3" : this.aprobacion3,
+      "aprobacion4" : this.aprobacion4,
+      "jefatura" : this.jefatura
+    }
+
+    this.http.post("http://127.0.0.1:8000/boleta",bodyData).subscribe((resultData: any)=>
+    {
+      console.log(resultData);
+      alert("boleta Registrado Correctamente");
+      this.getAllBoletas();
+    });
+  }
+
+  getAllBoletas()
+  {
+    this.http.get("http://127.0.0.1:8000/boleta")
+    .subscribe((resultData: any)=>
+    {
+      console.log(resultData);
+      this.BoletaArray = resultData;
+    });
+  }
+
+  setUpdateBoleta(data: any)
+  {
+    this.rutPrest = data.rutPrest;
+    this.DVPrest = data.DVPrest;
+    this.nombrePrest = data.nombrePrest;
+    this.id_bancoPrest = data.id_bancoPrest;
+    this.numero_cuentaPrest = data.numero_cuentaPrest;
+    this.correoPrest = data.correoPrest;
+    this.numBoleta = data.numBoleta;
+    this.fechaBoleta = data.fechaBoleta;
+    this.nomBoletaAdjunta = data.nomBoletaAdjunta;
+    this.CeCo = data.CeCo;
+    this.nombreUser = data.nombreUser;
+    this.aprobacion1 = data.aprobacion1;
+    this.aprobacion2 = data.aprobacion2;
+    this.aprobacion3 = data.aprobacion3;
+    this.aprobacion4 = data.aprobacion4;
+    this.jefatura = data.jefatura;
+
+  }
+
+  UpdateRecordsBoleta()
+  {
+    let bodyData = 
+    {
+      "rutPrest" : this.rutPrest,
+      "DVPrest" : this.DVPrest,
+      "nombrePrest" : this.nombrePrest,
+      "id_bancoPrest" : this.id_bancoPrest,
+      "numero_cuentaPrest" : this.numero_cuentaPrest,
+      "correoPrest" : this.correoPrest,
+      "numBoleta" : this.numBoleta,
+      "fechaBoleta" : this.fechaBoleta,
+      "nomBoletaAdjunta" : this.nomBoletaAdjunta,
+      "CeCo" : this.CeCo,
+      "nombreUser" : this.nombreUser,
+      "aprobacion1" : this.aprobacion1,
+      "aprobacion2" : this.aprobacion2,
+      "aprobacion3" : this.aprobacion3,
+      "aprobacion4" : this.aprobacion4,
+      "jefatura" : this.jefatura
+    };
+
+    this.http.put("http://127.0.0.1:8000/boleta"+ this.numBoleta , bodyData).subscribe((resultData: any)=>
+    {
+      console.log(resultData);
+      alert("Boleta Registered Updated")
+
+      this.rutPrest = 0;
+      this.DVPrest = "";
+      this.nombrePrest = "";
+      this.id_bancoPrest = 0;
+      this.numero_cuentaPrest = 0;
+      this.correoPrest = "";
+      this.fechaBoleta = "";
+      this.nomBoletaAdjunta = "";
+      this.CeCo = 0;
+      this.nombreUser = ""
+      this.aprobacion1 = 0;
+      this.aprobacion2 = 0;
+      this.aprobacion3 = 0;
+      this.aprobacion4 = 0;
+      this.jefatura = 0;
+
+      this.getAllBoletas();
+    });
+  }
+
+  setDeleteBoleta(data: any)
+  {
+    this.http.delete("http://127.0.0.1:8000/boleta"+ "/"+ data.numBoleta).subscribe((resultData: any)=>
+    {
+      console.log(resultData);
+      alert("Boleta Eliminado")
+      this.getAllBoletas();
+    });
+  }
+
+  ocultarBoleta()
+  {
+    const navElement = document.getElementById('divBoleta');
+    if (navElement) {
+      navElement.style.display = 'none';
+    }
+    const navElement2 = document.getElementById('divBoleta2');
+    if (navElement2) {
+      navElement2.style.display = 'none';
+    }
+  }
+
+  mostrarBoleta()
+  {
+    const navElement = document.getElementById('divBoleta');
+    if (navElement) {
+      navElement.style.display = 'block';
+    }
+    const navElement2 = document.getElementById('divBoleta2');
+    if (navElement2) {
+      navElement2.style.display = 'block';
+    }
+
+    this.ocultarUserAdmin()
+    this.ocultarPrestador();
+    this.ocultarCeco();
   }
 }

@@ -31,5 +31,9 @@ urlpatterns = [
     url(r'^prestadorservicios$',views.prestadorApi),
     url(r'^prestadorservicios/([0-9]+)$',views.prestadorApi),
 
+    url(r'^boleta$',views.boletaApi),
+    url(r'^boleta$',views.boletaApi),
+    url(r'^boleta/([0-9]+)$',views.boletaApi),
+
      path('admin/', admin.site.urls),
 ]

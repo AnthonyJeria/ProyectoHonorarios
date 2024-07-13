@@ -40,7 +40,7 @@
                 </button>
               </li>
               <li class="nav-item">
-                <button class="nav-link" href="#">
+                <button class="nav-link" (click)="mostrarBoleta()">
                   <span data-feather="users"></span>
                   Gestion de Boletas
                 </button>
@@ -71,41 +71,41 @@
                     </div>
     
                     <div class="form-group">
-                        <label >nombre</label>
+                        <label >Nombre</label>
                         <input type="text" [(ngModel)]="nombre" [ngModelOptions]="{standalone: true}" class="form-control" id="usernombre" name="usernombre">
                     </div>
     
                     <div class="form-group">
-                        <label >apellido1</label>
+                        <label >Primer Apellido</label>
                         <input type="text" [(ngModel)]="apellido1" [ngModelOptions]="{standalone: true}" class="form-control" id="userapellido1" name="userapellido1">
                     </div>
     
                     <div class="form-group">
-                        <label >apellido2</label>
+                        <label >Segundo Apellido</label>
                         <input type="text" [(ngModel)]="apellido2" [ngModelOptions]="{standalone: true}" class="form-control" id="userapellido2" name="userapellido2">
                     </div>
     
                     <div class="form-group">
-                        <label >nombre_usuario</label>
+                        <label >Nombre de Usuario</label>
                         <input type="text" [(ngModel)]="nombre_usuario" [ngModelOptions]="{standalone: true}" class="form-control" id="usernombre_usuario" name="usernombre_usuario">
                     </div>
     
                     <div class="form-group">
-                        <label >correo</label>
+                        <label >Correo Electronico</label>
                         <input type="text" [(ngModel)]="correo" [ngModelOptions]="{standalone: true}" class="form-control" id="usercorreo" name="usercorreo">
                     </div>
     
                     <div class="form-group">
-                        <label >clave</label>
+                        <label >Clave</label>
                         <input type="text" [(ngModel)]="clave" [ngModelOptions]="{standalone: true}" class="form-control" id="userclave" name="userclave">
                     </div>
     
                     <div class="form-group">
-                        <label >id_tipo_usuario</label>
+                        <label >Tipo de Usuario</label>
                         <input type="text" [(ngModel)]="id_tipo_usuario" [ngModelOptions]="{standalone: true}" class="form-control" id="userid_tipo_usuario" name="userid_tipo_usuario">
                     </div>
     
-                    <button type="submit" class="btn btn-primary mt-4" (click)="saveRecords()">Save</button> &nbsp;
+                    <button type="submit" class="btn btn-primary mt-4" (click)="saveRecords()">Guardar</button> &nbsp;
     
                     <button type="submit" class="btn btn-warning mt-4"  (click)="UpdateRecords()">Update</button>
     
@@ -119,35 +119,31 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">rut</th>
-                            <th scope="col">DV</th>
-                            <th scope="col">nombre</th>
-                            <th scope="col">apellido1</th>
-                            <th scope="col">apellido2</th>
+                            <th scope="col">Rut</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellidos</th>
                             <th scope="col">nombre_usuario</th>
                             <th scope="col">correo</th>
                             <th scope="col">clave</th>
-                            <th scope="col">id_tipo_usuario</th>
+                            <th scope="col">Tipo de Usuario</th>
                         </tr>
                     </thead>
     
                     <tbody>
                         <tr *ngFor="let UserItem of UserArray">
     
-                            <td>{{UserItem.rut}}</td>
-                            <td>{{UserItem.DV}}</td>
+                            <td>{{UserItem.rut}}-{{UserItem.DV}}</td>
                             <td>{{UserItem.nombre}}</td>
-                            <td>{{UserItem.apellido1}}</td>
-                            <td>{{UserItem.apellido2}}</td>
+                            <td>{{UserItem.apellido1}} {{UserItem.apellido2}}</td>
                             <td>{{UserItem.nombre_usuario}}</td>
                             <td>{{UserItem.correo}}</td>
                             <td>{{UserItem.clave}}</td>
                             <td>{{UserItem.id_tipo_usuario}}</td>
     
                             <td>
-                                <button type="button" class="btn btn-success" (click)="setUpdate(UserItem)">Edit</button>
+                                <button type="button" class="btn btn-success" (click)="setUpdate(UserItem)">Editar</button>
     
-                                <button type="button" class="btn btn-danger" (click)="setDelete(UserItem)">Delete</button>
+                                <button type="button" class="btn btn-danger" (click)="setDelete(UserItem)">Borrar</button>
     
                             </td>
                         </tr>
@@ -164,12 +160,12 @@
                 <form>
                     <div class="form-group">
                         <label >Numero Centro de Costo</label>
-                        <input type="text" [(ngModel)]="numCeCo" [ngModelOptions]="{standalone: true}" class="form-control" id="ceconum" name="ceconum">
+                        <input type="text" [(ngModel)]="num_CeCo" [ngModelOptions]="{standalone: true}" class="form-control" id="ceconum" name="ceconum">
                     </div>
 
                     <div class="form-group">
                       <label >Nombre Centro de Costo</label>
-                      <input type="text" [(ngModel)]="nombreCeCo" [ngModelOptions]="{standalone: true}" class="form-control" id="ceconom" name="ceconom">
+                      <input type="text" [(ngModel)]="nombre_CeCo" [ngModelOptions]="{standalone: true}" class="form-control" id="ceconom" name="ceconom">
                     </div>
 
                     <div class="form-group">
@@ -182,9 +178,9 @@
                       <input type="text" [(ngModel)]="fecha_fin" [ngModelOptions]="{standalone: true}" class="form-control" id="ceconum" name="ceconum">
                     </div>
     
-                    <button type="submit" class="btn btn-primary mt-4" (click)="saveRecordsCeCo()">Save</button> &nbsp;
+                    <button type="submit" class="btn btn-primary mt-4" (click)="saveRecordsCeCo()">Guardar</button> &nbsp;
     
-                    <button type="submit" class="btn btn-warning mt-4"  (click)="UpdateRecordsCeCo()">Update</button>
+                    <button type="submit" class="btn btn-warning mt-4"  (click)="UpdateRecordsCeCo()">Modificar</button>
     
                 </form>
             </div>
@@ -196,10 +192,10 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">numCeCo</th>
-                            <th scope="col">nombreCeCo</th>
-                            <th scope="col">fecha_inicio</th>
-                            <th scope="col">fecha_fin</th>
+                            <th scope="col">Numero</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Fecha de Inicio</th>
+                            <th scope="col">Fecha de Fin</th>
 
                         </tr>
                     </thead>
@@ -207,15 +203,15 @@
                     <tbody>
                         <tr *ngFor="let CeCoItem of CeCoArray">
     
-                            <td>{{CeCoItem.numCeCo}}</td>
-                            <td>{{CeCoItem.nombreCeCo}}</td>
+                            <td>{{CeCoItem.num_CeCo}}</td>
+                            <td>{{CeCoItem.nombre_CeCo}}</td>
                             <td>{{CeCoItem.fecha_inicio}}</td>
                             <td>{{CeCoItem.fecha_fin}}</td>
     
                             <td>
-                                <button type="button" class="btn btn-success" (click)="setUpdateCeCo(CeCoItem)">Edit</button>
+                                <button type="button" class="btn btn-success" (click)="setUpdateCeCo(CeCoItem)">Editar</button>
     
-                                <button type="button" class="btn btn-danger" (click)="setDeleteCeCo(CeCoItem)">Delete</button>
+                                <button type="button" class="btn btn-danger" (click)="setDeleteCeCo(CeCoItem)">Borrar</button>
     
                             </td>
                         </tr>
@@ -245,17 +241,17 @@
                     </div>
 
                     <div class="form-group">
-                      <label >Apellido1</label>
+                      <label >Primer Apellido</label>
                       <input type="text" [(ngModel)]="apellido1Prestador" [ngModelOptions]="{standalone: true}" class="form-control" id="apellido1Prestador" name="apellido1Prestador">
                     </div>
 
                     <div class="form-group">
-                      <label >Apellido2</label>
+                      <label >Segundo Apellido</label>
                       <input type="text" [(ngModel)]="apellido2Prestador" [ngModelOptions]="{standalone: true}" class="form-control" id="apellido2Prestador" name="apellido2Prestador">
                     </div>
 
                     <div class="form-group">
-                      <label >Correo</label>
+                      <label >Correo Electronico</label>
                       <input type="text" [(ngModel)]="correoPrestador" [ngModelOptions]="{standalone: true}" class="form-control" id="correoPrestador" name="correoPrestador">
                     </div>
 
@@ -274,9 +270,9 @@
                       <input type="text" [(ngModel)]="numero_cuenta" [ngModelOptions]="{standalone: true}" class="form-control" id="numero_cuenta" name="numero_cuenta">
                     </div>
     
-                    <button type="submit" class="btn btn-primary mt-4" (click)="saveRecordsPrestador()">Save</button> &nbsp;
+                    <button type="submit" class="btn btn-primary mt-4" (click)="saveRecordsPrestador()">Guardar</button> &nbsp;
     
-                    <button type="submit" class="btn btn-warning mt-4"  (click)="UpdateRecordsPrestador()">Update</button>
+                    <button type="submit" class="btn btn-warning mt-4"  (click)="UpdateRecordsPrestador()">Modificar</button>
     
                 </form>
             </div>
@@ -288,15 +284,13 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">rutPrestador</th>
-                            <th scope="col">DVPrestador</th>
-                            <th scope="col">nombrePrestador</th>
-                            <th scope="col">apellido1Prestador</th>
-                            <th scope="col">apellido2Prestador</th>
-                            <th scope="col">correoPrestador</th>
-                            <th scope="col">id_banco</th>
-                            <th scope="col">tipo_cuenta</th>
-                            <th scope="col">numero_cuenta</th>
+                            <th scope="col">Rut</th>
+                            <th scope="col">Nombrer</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">Correo Electronico</th>
+                            <th scope="col">Banco</th>
+                            <th scope="col">Tipo de Cuenta</th>
+                            <th scope="col">Numero de Cuenta</th>
 
                         </tr>
                     </thead>
@@ -304,20 +298,18 @@
                     <tbody>
                         <tr *ngFor="let PrestadorItem of PrestadorArray">
     
-                            <td>{{PrestadorItem.rutPrestador}}</td>
-                            <td>{{PrestadorItem.DVPrestador}}</td>
+                            <td>{{PrestadorItem.rutPrestador}}-{{PrestadorItem.DVPrestador}}</td>
                             <td>{{PrestadorItem.nombrePrestador}}</td>
-                            <td>{{PrestadorItem.apellido1Prestador}}</td>
-                            <td>{{PrestadorItem.apellido2Prestador}}</td>
+                            <td>{{PrestadorItem.apellido1Prestador}} {{PrestadorItem.apellido2Prestador}}</td>
                             <td>{{PrestadorItem.correoPrestador}}</td>
                             <td>{{PrestadorItem.id_banco}}</td>
                             <td>{{PrestadorItem.tipo_cuenta}}</td>
                             <td>{{PrestadorItem.numero_cuenta}}</td>
     
                             <td>
-                                <button type="button" class="btn btn-success" (click)="setUpdatePrestador(PrestadorItem)">Edit</button>
+                                <button type="button" class="btn btn-success" (click)="setUpdatePrestador(PrestadorItem)">Editar</button>
     
-                                <button type="button" class="btn btn-danger" (click)="setDeletePrestador(PrestadorItem)">Delete</button>
+                                <button type="button" class="btn btn-danger" (click)="setDeletePrestador(PrestadorItem)">Borrar</button>
     
                             </td>
                         </tr>
@@ -327,12 +319,147 @@
             </div>
           </div>
 
+          <div id="divBoleta" >
+            <h1>Agregar Boleta de Honorarios</h1>
+            <div class="card">
+                <form>
+                    <div class="form-group">
+                        <label >Rut del Prestador de Servicios</label>
+                        <input type="text" [(ngModel)]="rutPrest" [ngModelOptions]="{standalone: true}" class="form-control" id="rutPrest" name="rutPrest">
+                    </div>
+      
+                    <div class="form-group">
+                      <label >DV del Prestador de Servicios</label>
+                      <input type="text" [(ngModel)]="DVPrest" [ngModelOptions]="{standalone: true}" class="form-control" id="DVPrest" name="DVPrest">
+                    </div>
+      
+                    <div class="form-group">
+                      <label >Nombre del Prestador de Servicios</label>
+                      <input type="text" [(ngModel)]="nombrePrest" [ngModelOptions]="{standalone: true}" class="form-control" id="nombrePrest" name="nombrePrest">
+                    </div>
+      
+                    <div class="form-group">
+                      <label >Banco del Prestador de Servicios</label>
+                      <input type="text" [(ngModel)]="id_bancoPrest" [ngModelOptions]="{standalone: true}" class="form-control" id="id_bancoPrest" name="id_bancoPrest">
+                    </div>
+      
+                    <div class="form-group">
+                      <label >Numero de cuenta</label>
+                      <input type="text" [(ngModel)]="numero_cuentaPrest" [ngModelOptions]="{standalone: true}" class="form-control" id="numero_cuentaPrest" name="numero_cuentaPrest">
+                    </div>
+      
+                    <div class="form-group">
+                      <label >Correo Electronico</label>
+                      <input type="text" [(ngModel)]="correoPrest" [ngModelOptions]="{standalone: true}" class="form-control" id="correoPrest" name="correoPrest">
+                    </div>
+      
+                    <div class="form-group">
+                      <label >Numero de Boleta</label>
+                      <input type="text" [(ngModel)]="numBoleta" [ngModelOptions]="{standalone: true}" class="form-control" id="numBoleta" name="numBoleta">
+                    </div>
+      
+                    <div class="form-group">
+                      <label >Fecha Boleta</label>
+                      <input type="text" [(ngModel)]="fechaBoleta" [ngModelOptions]="{standalone: true}" class="form-control" id="fechaBoleta" name="fechaBoleta">
+                    </div>
+      
+                    <div class="form-group">
+                      <label >Boleta Adjunta</label>
+                      <input type="text" [(ngModel)]="nomBoletaAdjunta" [ngModelOptions]="{standalone: true}" class="form-control" id="nomBoletaAdjunta" name="nomBoletaAdjunta">
+                    </div>
+      
+                    <div class="form-group">
+                      <label >Centro de Costo</label>
+                      <input type="text" [(ngModel)]="CeCo" [ngModelOptions]="{standalone: true}" class="form-control" id="CeCo" name="CeCo">
+                    </div>
+      
+                    <div class="form-group">
+                      <label >Nombre de Usuario</label>
+                      <input type="text" [(ngModel)]="nombreUser" [ngModelOptions]="{standalone: true}" class="form-control" id="nombreUser" name="nombreUser">
+                    </div>
+
+                    <div class="form-group">
+                      <label >aprobacion1</label>
+                      <input type="text" [(ngModel)]="aprobacion1" [ngModelOptions]="{standalone: true}" class="form-control" id="aprobacion1" name="aprobacion1">
+                    </div>
+
+                    <div class="form-group">
+                      <label >aprobacion2</label>
+                      <input type="text" [(ngModel)]="aprobacion2" [ngModelOptions]="{standalone: true}" class="form-control" id="aprobacion2" name="aprobacion2">
+                    </div>
+
+                    <div class="form-group">
+                      <label >aprobacion3</label>
+                      <input type="text" [(ngModel)]="aprobacion3" [ngModelOptions]="{standalone: true}" class="form-control" id="aprobacion3" name="aprobacion3">
+                    </div>
+
+                    <div class="form-group">
+                      <label >aprobacion4</label>
+                      <input type="text" [(ngModel)]="aprobacion4" [ngModelOptions]="{standalone: true}" class="form-control" id="aprobacion4" name="aprobacion4">
+                    </div>
+
+                    <div class="form-group">
+                      <label >jefatura</label>
+                      <input type="text" [(ngModel)]="jefatura" [ngModelOptions]="{standalone: true}" class="form-control" id="jefatura" name="jefatura">
+                    </div>
+                    
+      
+                    <button type="submit" class="btn btn-primary mt-4" (click)="saveRecordsBoleta()">Guardar</button> &nbsp;
+      
+                    <button type="submit" class="btn btn-warning mt-4"  (click)="UpdateRecordsBoleta()">Modificar</button>
+      
+                </form>
+            </div>
+          </div>
+      
+          <div id="divBoleta2">
+            <div>
+                <h1>Lista de Boletas de Honorarios</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Rut</th>
+                            <th scope="col">Nombre Prestador</th>
+                            <th scope="col">Banco</th>
+                            <th scope="col">Numero de Cuenta</th>
+                            <th scope="col">Correo Electronico</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Boleta adjunta</th>
+                            <th scope="col">Centro de Costo</th>
+                            <th scope="col">Nombre Usuario</th>
+      
+                        </tr>
+                    </thead>
+      
+                    <tbody>
+                        <tr *ngFor="let BoletaItem of BoletaArray">
+      
+                            <td>{{BoletaItem.rutPrest}}-{{BoletaItem.DVPrest}}</td>
+                            <td>{{BoletaItem.nombrePrest}}</td>
+                            <td>{{BoletaItem.id_bancoPrest}}</td>
+                            <td>{{BoletaItem.numero_cuentaPrest}}</td>
+                            <td>{{BoletaItem.correoPrest}}</td>
+                            <td>{{BoletaItem.fechaBoleta}}</td>
+                            <td>{{BoletaItem.nomBoletaAdjunta}}</td>
+                            <td>{{BoletaItem.CeCo}}</td>
+                            <td>{{BoletaItem.nombreUser}}</td>
+      
+                            <td>
+                                <button type="button" class="btn btn-success" (click)="setUpdateBoleta(BoletaItem)">Editar</button>
+      
+                                <button type="button" class="btn btn-danger" (click)="setDeleteBoleta(BoletaItem)">Borrar</button>
+      
+                            </td>
+                        </tr>
+                    </tbody>
+      
+                </table>
+            </div>
+          </div>
+
         </nav>
       </div>
     </div>
-
-
-    
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>

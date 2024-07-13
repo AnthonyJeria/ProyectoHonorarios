@@ -1,8 +1,8 @@
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
-from GestionApp.serializers import UsuarioSerializer, Tipo_usuarioSerializer, CeCoSerializer, prestadorServiciosSerializer
-from GestionApp.models import Usuario, Tipo_usuario, CeCo, prestadorServicios
+from GestionApp.serializers import UsuarioSerializer, Tipo_usuarioSerializer, CeCoSerializer, prestadorServiciosSerializer, boletaSerializer
+from GestionApp.models import Usuario, Tipo_usuario, CeCo, prestadorServicios, boleta
 
 @csrf_exempt
 def usuarioApi(request,rut=0):
@@ -89,4 +89,33 @@ def prestadorApi(request,rutPrestador=0):
     elif request.method=='DELETE':
         prestador=prestadorServicios.objects.get(rutPrestador=rutPrestador)
         prestador.delete()
+        return JsonResponse("Deleted Successfully",safe=False)
+    
+@csrf_exempt
+def boletaApi(request,rutPrest=0):
+    if request.method=='GET':
+        bol = boleta.objects.all()
+        bolSerializer=boletaSerializer(bol,many=True)
+        return JsonResponse(bolSerializer.data,safe=False)
+    
+    elif request.method=='POST':
+        boleta_data=JSONParser().parse(request)
+        bolSerializer=boletaSerializer(data=boleta_data)
+        if bolSerializer.is_valid():
+            bolSerializer.save()
+            return JsonResponse("Added Successfully",safe=False)
+        return JsonResponse("Failed to Add",safe=False)
+    
+    elif request.method=='PUT':
+        boleta_data=JSONParser().parse(request)
+        bol=boleta.objects.get(rutPrest=rutPrest)
+        bolSerializer=boletaSerializer(bol,data=boleta_data)
+        if bolSerializer.is_valid():
+            bolSerializer.save()
+            return JsonResponse("Updated Successfully",safe=False)
+        return JsonResponse("Failed to Update")
+    
+    elif request.method=='DELETE':
+        bol=boleta.objects.get(rutPrest=rutPrest)
+        bol.delete()
         return JsonResponse("Deleted Successfully",safe=False)

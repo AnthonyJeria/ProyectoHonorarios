@@ -86,7 +86,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.parse('mysql://root@localhost/bdgestionhonorarios')
+DATABASES['default'] = dj_database_url.parse('mysql://root@localhost/honorarios')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
