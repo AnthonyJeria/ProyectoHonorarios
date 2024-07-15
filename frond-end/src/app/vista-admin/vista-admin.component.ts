@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-vista-admin',
@@ -8,6 +9,7 @@ import { Component } from '@angular/core';
 })
 export class VistaAdminComponent {
 
+  nombreUserSecion: string = "";
   
   UserArray : any[] = [];
 
@@ -67,7 +69,7 @@ export class VistaAdminComponent {
 
   currentBoletaID = "";
 
-  constructor(private http: HttpClient )
+  constructor(private http: HttpClient, private userService: UserService )
   {
     this.getAllUser();
     this.getAllCeCo();
@@ -80,6 +82,7 @@ export class VistaAdminComponent {
     this.ocultarCeco();
     this.ocultarPrestador();
     this.ocultarBoleta();
+    this.nombreUserSecion = this.userService.getNombre();
   }
 
   saveRecords()
