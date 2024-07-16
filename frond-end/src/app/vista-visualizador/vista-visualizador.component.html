@@ -1,1 +1,151 @@
-<p>vista-visualizador works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin</title>
+    <link rel="stylesheet" href="vista-visualizador.component.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body>
+
+    <nav class="navbar navbar-light bg-light">
+      <span class="navbar-brand mb-0 h1">Administrador</span>
+      <span class="navbar-brand mb-0 h1">{{ nombreUserSecion }}</span>
+      <a class="nav-link" href="#">Cerrar Secion <span class="sr-only">(current)</span></a>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+          <div class="sidebar-sticky pt-3">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <button class="nav-link active" (click)="mostrarCeco()">
+                  <span data-feather="home"></span>
+                  Centros de Costo <span class="sr-only">(current)</span>
+                </button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" (click)="mostrarPrestador()">
+                  <span data-feather="shopping-cart"></span>
+                  Prestadores de Servicios
+                </button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" (click)="mostrarBoleta()">
+                  <span data-feather="users"></span>
+                  Gestion de Boletas
+                </button>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        
+        <nav class="col-md-3 col-lg-10 d-md-block sidebar collapse">
+          <div id="divCeCo2">
+            <div>
+                <h1>Lista de Centros de Costos</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Numero</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Fecha de Inicio</th>
+                            <th scope="col">Fecha de Fin</th>
+
+                        </tr>
+                    </thead>
+    
+                    <tbody>
+                        <tr *ngFor="let CeCoItem of CeCoArray">
+                            <td>{{CeCoItem.num_CeCo}}</td>
+                            <td>{{CeCoItem.nombre_CeCo}}</td>
+                            <td>{{CeCoItem.fecha_inicio}}</td>
+                            <td>{{CeCoItem.fecha_fin}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+
+          <div id="divPrestador2">
+            <div>
+                <h1>Lista de Prestadores de Servicios</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Rut</th>
+                            <th scope="col">Nombrer</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">Correo Electronico</th>
+                            <th scope="col">Banco</th>
+                            <th scope="col">Tipo de Cuenta</th>
+                            <th scope="col">Numero de Cuenta</th>
+
+                        </tr>
+                    </thead>
+    
+                    <tbody>
+                        <tr *ngFor="let PrestadorItem of PrestadorArray">
+    
+                            <td>{{PrestadorItem.rutPrestador}}-{{PrestadorItem.DVPrestador}}</td>
+                            <td>{{PrestadorItem.nombrePrestador}}</td>
+                            <td>{{PrestadorItem.apellido1Prestador}} {{PrestadorItem.apellido2Prestador}}</td>
+                            <td>{{PrestadorItem.correoPrestador}}</td>
+                            <td>{{PrestadorItem.id_banco}}</td>
+                            <td>{{PrestadorItem.tipo_cuenta}}</td>
+                            <td>{{PrestadorItem.numero_cuenta}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+
+          <div id="divBoleta2">
+            <div>
+                <h1>Lista de Boletas de Honorarios</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Rut</th>
+                            <th scope="col">Nombre Prestador</th>
+                            <th scope="col">Banco</th>
+                            <th scope="col">Numero de Cuenta</th>
+                            <th scope="col">Correo Electronico</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Boleta adjunta</th>
+                            <th scope="col">Centro de Costo</th>
+                            <th scope="col">Nombre Usuario</th>
+                        </tr>
+                    </thead>
+      
+                    <tbody>
+                        <tr *ngFor="let BoletaItem of BoletaArray">
+      
+                            <td>{{BoletaItem.rutPrest}}-{{BoletaItem.DVPrest}}</td>
+                            <td>{{BoletaItem.nombrePrest}}</td>
+                            <td>{{BoletaItem.id_bancoPrest}}</td>
+                            <td>{{BoletaItem.numero_cuentaPrest}}</td>
+                            <td>{{BoletaItem.correoPrest}}</td>
+                            <td>{{BoletaItem.fechaBoleta}}</td>
+                            <td>{{BoletaItem.nomBoletaAdjunta}}</td>
+                            <td>{{BoletaItem.CeCo}}</td>
+                            <td>{{BoletaItem.nombreUser}}</td>
+                        </tr>
+                    </tbody>
+      
+                </table>
+            </div>
+          </div>
+
+        </nav>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+</body>
+</html>
