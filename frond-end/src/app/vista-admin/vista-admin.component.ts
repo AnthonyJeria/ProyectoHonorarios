@@ -45,6 +45,7 @@ export class VistaAdminComponent {
   id_banco: number = 0;
   tipo_cuenta: string = "";
   numero_cuenta: number = 0;
+  nombre_banco: string = ""
 
   currentPrestadorID = "";
 
@@ -98,7 +99,6 @@ export class VistaAdminComponent {
       "clave" : this.clave,
       "id_tipo_usuario" : this.id_tipo_usuario
     }
-
     this.http.post("http://127.0.0.1:8000/usuario",bodyData).subscribe((resultData: any)=>
     {
       console.log(resultData);
@@ -521,7 +521,7 @@ export class VistaAdminComponent {
 
   setDeleteBoleta(data: any)
   {
-    this.http.delete("http://127.0.0.1:8000/boleta"+ "/"+ data.numBoleta).subscribe((resultData: any)=>
+    this.http.delete("http://127.0.0.1:8000/boleta"+ "/"+ data.rutPrest).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Boleta Eliminado")
@@ -555,5 +555,63 @@ export class VistaAdminComponent {
     this.ocultarUserAdmin()
     this.ocultarPrestador();
     this.ocultarCeco();
+  }
+
+  getBankName(id: number): string{
+    
+    switch(id){
+      case 1:
+        this.nombre_banco = "BANCO DE CHILE"
+        break;
+      case 2:
+        this.nombre_banco = "BANCO INTERNACIONAL"
+        break;
+      case 3:
+        this.nombre_banco = "SCOTIABANK CHILE"
+        break;
+      case 4:
+        this.nombre_banco = "BANCO DE CREDITO E INVERSIONES"
+        break;
+      case 5:
+        this.nombre_banco = "BANCO BICE"
+        break;
+      case 6:
+        this.nombre_banco = "HSBC BANK"
+        break;
+      case 7:
+          this.nombre_banco = "BANCO SANTANDER-CHILE"
+          break;
+      case 8:
+        this.nombre_banco = "BANCO ITAÚ CHILE"
+        break;
+      case 9:
+        this.nombre_banco = "BANCO SECURITY"
+        break;
+      case 10:
+        this.nombre_banco = "BANCO FALABELLA"
+        break;
+      case 11:
+        this.nombre_banco = "BANCO RIPLEY"
+        break;
+      case 12:
+        this.nombre_banco = "BANCO CONSORCIO"
+        break;
+      case 13:
+        this.nombre_banco = "BANCO BTG PACTUAL CHILE"
+        break;
+      case 14:
+        this.nombre_banco = "JP MORGAN CHASE BANK, N. A."
+        break;
+      case 15:
+        this.nombre_banco = "CHINA CONSTRUCTION BANK"
+        break;
+      case 16:
+        this.nombre_banco = "BANK OF CHINA"
+        break;
+      case 17:
+        this.nombre_banco = "BANCO DE CHILE"
+        break;
+    }
+    return this.nombre_banco;
   }
 }

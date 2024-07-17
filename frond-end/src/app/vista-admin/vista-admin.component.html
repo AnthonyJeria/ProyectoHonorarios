@@ -102,7 +102,7 @@
     
                     <div class="form-group">
                         <label >Tipo de Usuario</label>
-                        <select [(ngModel)]="id_tipo_usuario" [ngModelOptions]="{standalone: true}" id="userid_tipo_usuario" name="userid_tipo_usuario">
+                        <select [(ngModel)]="id_tipo_usuario" [ngModelOptions]="{standalone: true}" id="id_tipo_usuario" name="id_tipo_usuario">
                           <option value=1>Administrador</option>
                           <option value=2>Aprobador</option>
                           <option value=3>DDC</option>
@@ -330,7 +330,7 @@
                             <td>{{PrestadorItem.nombrePrestador}}</td>
                             <td>{{PrestadorItem.apellido1Prestador}} {{PrestadorItem.apellido2Prestador}}</td>
                             <td>{{PrestadorItem.correoPrestador}}</td>
-                            <td>{{PrestadorItem.id_banco}}</td>
+                            <td>{{getBankName(PrestadorItem.id_banco)}}</td>
                             <td>{{PrestadorItem.tipo_cuenta}}</td>
                             <td>{{PrestadorItem.numero_cuenta}}</td>
     
@@ -365,10 +365,28 @@
                       <label >Nombre del Prestador de Servicios</label>
                       <input type="text" [(ngModel)]="nombrePrest" [ngModelOptions]="{standalone: true}" class="form-control" id="nombrePrest" name="nombrePrest">
                     </div>
-      
+
                     <div class="form-group">
-                      <label >Banco del Prestador de Servicios</label>
-                      <input type="text" [(ngModel)]="id_bancoPrest" [ngModelOptions]="{standalone: true}" class="form-control" id="id_bancoPrest" name="id_bancoPrest">
+                      <label >Banco</label>
+                      <select [(ngModel)]="id_bancoPrest" [ngModelOptions]="{standalone: true}" id="id_bancoPrest" name="id_bancoPrest">
+                        <option value=1>BANCO DE CHILE</option>
+                        <option value=2>BANCO INTERNACIONAL</option>
+                        <option value=3>SCOTIABANK CHILE</option>
+                        <option value=4>BANCO DE CREDITO E INVERSIONES</option>
+                        <option value=5>BANCO BICE</option>
+                        <option value=6>HSBC BANK</option>
+                        <option value=7>BANCO SANTANDER-CHILE</option>
+                        <option value=8>BANCO ITAÚ CHILE</option>
+                        <option value=9>BANCO SECURITY</option>
+                        <option value=10>BANCO FALABELLA</option>
+                        <option value=11>BANCO RIPLEY</option>
+                        <option value=12>BANCO CONSORCIO</option>
+                        <option value=13>BANCO BTG PACTUAL CHILE</option>
+                        <option value=14>JP MORGAN CHASE BANK, N. A.</option>
+                        <option value=15>CHINA CONSTRUCTION BANK</option>
+                        <option value=16>BANK OF CHINA</option>
+                        <option value=17>BANCO ESTADO</option>
+                      </select>
                     </div>
       
                     <div class="form-group">
@@ -400,38 +418,12 @@
                       <label >Centro de Costo</label>
                       <input type="text" [(ngModel)]="CeCo" [ngModelOptions]="{standalone: true}" class="form-control" id="CeCo" name="CeCo">
                     </div>
-      
-                    <div class="form-group">
-                      <label >Nombre de Usuario</label>
-                      <input type="text" [(ngModel)]="nombreUser" [ngModelOptions]="{standalone: true}" class="form-control" id="nombreUser" name="nombreUser">
-                    </div>
-
-                    <div class="form-group">
-                      <label >aprobacion1</label>
-                      <input type="text" [(ngModel)]="aprobacion1" [ngModelOptions]="{standalone: true}" class="form-control" id="aprobacion1" name="aprobacion1">
-                    </div>
-
-                    <div class="form-group">
-                      <label >aprobacion2</label>
-                      <input type="text" [(ngModel)]="aprobacion2" [ngModelOptions]="{standalone: true}" class="form-control" id="aprobacion2" name="aprobacion2">
-                    </div>
-
-                    <div class="form-group">
-                      <label >aprobacion3</label>
-                      <input type="text" [(ngModel)]="aprobacion3" [ngModelOptions]="{standalone: true}" class="form-control" id="aprobacion3" name="aprobacion3">
-                    </div>
-
-                    <div class="form-group">
-                      <label >aprobacion4</label>
-                      <input type="text" [(ngModel)]="aprobacion4" [ngModelOptions]="{standalone: true}" class="form-control" id="aprobacion4" name="aprobacion4">
-                    </div>
 
                     <div class="form-group">
                       <label >jefatura</label>
                       <input type="text" [(ngModel)]="jefatura" [ngModelOptions]="{standalone: true}" class="form-control" id="jefatura" name="jefatura">
                     </div>
                     
-      
                     <button type="submit" class="btn btn-primary mt-4" (click)="saveRecordsBoleta()">Guardar</button> &nbsp;
       
                     <button type="submit" class="btn btn-warning mt-4"  (click)="UpdateRecordsBoleta()">Modificar</button>
