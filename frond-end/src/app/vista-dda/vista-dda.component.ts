@@ -50,7 +50,7 @@ export class VistaDDAComponent {
   fechaBoleta: string = "";
   nomBoletaAdjunta: string = "";
   CeCo: number = 0;
-  nombreUser: string = "a";
+  nombreUser: string = this.nombreUserSecion;
   aprobacion1: number = 1;
   aprobacion2: number = 1;
   aprobacion3: number = 0;
@@ -389,7 +389,7 @@ export class VistaDDAComponent {
       this.fechaBoleta = "";
       this.nomBoletaAdjunta = "";
       this.CeCo = 0;
-      this.nombreUser = ""
+      this.nombreUser = this.nombreUserSecion;
       this.aprobacion1 = 1;
       this.aprobacion2 = 0;
       this.aprobacion3 = 0;
@@ -526,7 +526,7 @@ export class VistaDDAComponent {
         this.aprobacionBoleta = "Aprobada"
         break;
       case 2:
-        this.aprobacionBoleta = "Rechasada"
+        this.aprobacionBoleta = "Rechazada"
         break;
     }
     return this.aprobacionBoleta;
@@ -598,7 +598,7 @@ export class VistaDDAComponent {
       "nomBoletaAdjunta" : this.nomBoletaAdjunta,
       "CeCo" : this.CeCo,
       "nombreUser" : this.nombreUser,
-      "aprobacion1" : this.aprobacion1,
+      "aprobacion1" : 2,
       "aprobacion2" : 2,
       "aprobacion3" : this.aprobacion3,
       "aprobacion4" : this.aprobacion4,

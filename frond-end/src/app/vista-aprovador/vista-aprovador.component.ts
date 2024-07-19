@@ -47,7 +47,7 @@ export class VistaAprovadorComponent {
   fechaBoleta: string = "";
   nomBoletaAdjunta: string = "";
   CeCo: number = 0;
-  nombreUser: string = "a";
+  nombreUser: string = this.nombreUserSecion;
   aprobacion1: number = 1;
   aprobacion2: number = 0;
   aprobacion3: number = 0;
@@ -383,7 +383,7 @@ export class VistaAprovadorComponent {
       this.fechaBoleta = "";
       this.nomBoletaAdjunta = "";
       this.CeCo = 0;
-      this.nombreUser = ""
+      this.nombreUser = this.nombreUserSecion;
       this.aprobacion1 = 1;
       this.aprobacion2 = 0;
       this.aprobacion3 = 0;

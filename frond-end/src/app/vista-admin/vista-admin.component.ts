@@ -61,7 +61,7 @@ export class VistaAdminComponent {
   fechaBoleta: string = "";
   nomBoletaAdjunta: string = "";
   CeCo: number = 0;
-  nombreUser: string = "a";
+  nombreUser: string = this.nombreUserSecion;
   aprobacion1: number = 1;
   aprobacion2: number = 1;
   aprobacion3: number = 1;
@@ -427,7 +427,13 @@ export class VistaAdminComponent {
       "numBoleta" : this.numBoleta,
       "fechaBoleta" : this.fechaBoleta,
       "nomBoletaAdjunta" : this.nomBoletaAdjunta,
-      "CeCo" : this.CeCo
+      "CeCo" : this.CeCo,
+      "nombreUser" : this.nombreUser,
+      "aprobacion1" : this.aprobacion1,
+      "aprobacion2" : this.aprobacion2,
+      "aprobacion3" : this.aprobacion3,
+      "aprobacion4" : this.aprobacion4,
+      "jefatura" : this.jefatura
     }
 
     this.http.post("http://127.0.0.1:8000/boleta",bodyData).subscribe((resultData: any)=>
@@ -506,7 +512,7 @@ export class VistaAdminComponent {
       this.fechaBoleta = "";
       this.nomBoletaAdjunta = "";
       this.CeCo = 0;
-      this.nombreUser = ""
+      this.nombreUser = this.nombreUserSecion;
       this.aprobacion1 = 1;
       this.aprobacion2 = 1;
       this.aprobacion3 = 1;
