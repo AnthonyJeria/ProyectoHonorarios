@@ -35,5 +35,6 @@ urlpatterns = [
     url(r'^boleta$',views.boletaApi),
     url(r'^boleta/([0-9]+)$',views.boletaApi),
 
-     path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
+
 ]

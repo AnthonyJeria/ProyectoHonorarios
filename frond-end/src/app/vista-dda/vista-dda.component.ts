@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../user.service';
 import { HttpClient } from '@angular/common/http';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-vista-dda',
@@ -658,7 +659,16 @@ export class VistaDDAComponent {
     this.boletasFullAprobadas();
   }
 
+  fileName = "ReporteBoletas.xlsx";
+
   generarReporte(){
     
+    let data = document.getElementById("table-data");
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
+
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Sheet1")
+
+    XLSX.writeFile(wb, this.fileName)
   }
 }
