@@ -39,6 +39,12 @@
                   Gestion de Boletas
                 </button>
               </li>
+              <li class="nav-item">
+                <button class="nav-link" (click)="mostrarAprovacion()">
+                  <span data-feather="users"></span>
+                  Aprovacion de Boletas
+                </button>
+              </li>
             </ul>
           </div>
         </nav>
@@ -343,7 +349,7 @@
                             <td>{{BoletaItem.nombreUser}}</td>
       
                             <td>
-                                <button type="button" class="btn btn-success" (click)="setUpdateBoleta(BoletaItem)">Editar</button>
+                                <button type="button" class="btn btn-success" (click)="aprobarBoleta(BoletaItem)">Editar</button>
       
                                 <button type="button" class="btn btn-danger" (click)="setDeleteBoleta(BoletaItem)">Borrar</button>
       
@@ -351,6 +357,48 @@
                         </tr>
                     </tbody>
       
+                </table>
+            </div>
+          </div>
+
+          <div id="divAprovacion">
+            <div>
+                <h1>Lista de Boletas Recibidas</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Rut</th>
+                            <th scope="col">Nombre Prestador</th>
+                            <th scope="col">Banco</th>
+                            <th scope="col">Numero de Cuenta</th>
+                            <th scope="col">Correo Electronico</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Boleta adjunta</th>
+                            <th scope="col">Centro de Costo</th>
+                            <th scope="col">Nombre Usuario</th>
+                            <th scope="col">Estado Boleta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let BoletaItem of BoletaArray">
+      
+                            <td>{{BoletaItem.rutPrest}}-{{BoletaItem.DVPrest}}</td>
+                            <td>{{BoletaItem.nombrePrest}}</td>
+                            <td>{{BoletaItem.id_bancoPrest}}</td>
+                            <td>{{BoletaItem.numero_cuentaPrest}}</td>
+                            <td>{{BoletaItem.correoPrest}}</td>
+                            <td>{{BoletaItem.fechaBoleta}}</td>
+                            <td>{{BoletaItem.nomBoletaAdjunta}}</td>
+                            <td>{{BoletaItem.CeCo}}</td>
+                            <td>{{BoletaItem.nombreUser}}</td>
+                            <td>{{estadoAprobacion(BoletaItem.aprobacion1)}}</td>
+                            <td>
+                                <button type="button" class="btn btn-success" (click)="aprobarBoleta(BoletaItem)">Aprobar</button>
+      
+                                <button type="button" class="btn btn-danger" (click)="RechazadaBoleta(BoletaItem)">Rechazar</button>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
           </div>

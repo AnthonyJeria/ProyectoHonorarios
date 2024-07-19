@@ -5,7 +5,7 @@ from GestionApp.serializers import UsuarioSerializer, Tipo_usuarioSerializer, Ce
 from GestionApp.models import Usuario, Tipo_usuario, CeCo, prestadorServicios, boleta
 
 @csrf_exempt
-def usuarioApi(request,rut=0):
+def usuarioApi(request,id=0):
     if request.method=='GET':
         usuario = Usuario.objects.all()
         usuario_serializer=UsuarioSerializer(usuario,many=True)
@@ -21,7 +21,7 @@ def usuarioApi(request,rut=0):
     
     elif request.method=='PUT':
         usuario_data=JSONParser().parse(request)
-        usuario=Usuario.objects.get(rut=rut)
+        usuario=Usuario.objects.get(id=id)
         usuario_serializer=UsuarioSerializer(usuario,data=usuario_data)
         if usuario_serializer.is_valid():
             usuario_serializer.save()
@@ -29,12 +29,12 @@ def usuarioApi(request,rut=0):
         return JsonResponse("Failed to Update")
     
     elif request.method=='DELETE':
-        usuario=Usuario.objects.get(rut=rut)
+        usuario=Usuario.objects.get(id=id)
         usuario.delete()
         return JsonResponse("Deleted Successfully",safe=False)
     
 @csrf_exempt
-def cecoApi(request,num_CeCo=0):
+def cecoApi(request,id=0):
     if request.method=='GET':
         ceco = CeCo.objects.all()
         cecoSerializer=CeCoSerializer(ceco,many=True)
@@ -50,7 +50,7 @@ def cecoApi(request,num_CeCo=0):
     
     elif request.method=='PUT':
         ceco_data=JSONParser().parse(request)
-        ceco=CeCo.objects.get(num_CeCo=num_CeCo)
+        ceco=CeCo.objects.get(id=id)
         cecoSerializer=CeCoSerializer(ceco,data=ceco_data)
         if cecoSerializer.is_valid():
             cecoSerializer.save()
@@ -58,12 +58,12 @@ def cecoApi(request,num_CeCo=0):
         return JsonResponse("Failed to Update")
     
     elif request.method=='DELETE':
-        ceco=CeCo.objects.get(num_CeCo=num_CeCo)
+        ceco=CeCo.objects.get(id=id)
         ceco.delete()
         return JsonResponse("Deleted Successfully",safe=False)
     
 @csrf_exempt
-def prestadorApi(request,rutPrestador=0):
+def prestadorApi(request,id=0):
     if request.method=='GET':
         prestador = prestadorServicios.objects.all()
         prestadorSerializer=prestadorServiciosSerializer(prestador,many=True)
@@ -79,7 +79,7 @@ def prestadorApi(request,rutPrestador=0):
     
     elif request.method=='PUT':
         prestador_data=JSONParser().parse(request)
-        prestador=prestadorServicios.objects.get(rutPrestador=rutPrestador)
+        prestador=prestadorServicios.objects.get(id=id)
         prestadorSerializer=prestadorServiciosSerializer(prestador,data=prestador_data)
         if prestadorSerializer.is_valid():
             prestadorSerializer.save()
@@ -87,12 +87,12 @@ def prestadorApi(request,rutPrestador=0):
         return JsonResponse("Failed to Update")
     
     elif request.method=='DELETE':
-        prestador=prestadorServicios.objects.get(rutPrestador=rutPrestador)
+        prestador=prestadorServicios.objects.get(id=id)
         prestador.delete()
         return JsonResponse("Deleted Successfully",safe=False)
     
 @csrf_exempt
-def boletaApi(request,rutPrest=0):
+def boletaApi(request,id=0):
     if request.method=='GET':
         bol = boleta.objects.all()
         bolSerializer=boletaSerializer(bol,many=True)
@@ -108,7 +108,7 @@ def boletaApi(request,rutPrest=0):
     
     elif request.method=='PUT':
         boleta_data=JSONParser().parse(request)
-        bol=boleta.objects.get(rutPrest=rutPrest)
+        bol=boleta.objects.get(id=id)
         bolSerializer=boletaSerializer(bol,data=boleta_data)
         if bolSerializer.is_valid():
             bolSerializer.save()
@@ -116,6 +116,6 @@ def boletaApi(request,rutPrest=0):
         return JsonResponse("Failed to Update")
     
     elif request.method=='DELETE':
-        bol=boleta.objects.get(rutPrest=rutPrest)
+        bol=boleta.objects.get(id=id)
         bol.delete()
         return JsonResponse("Deleted Successfully",safe=False)

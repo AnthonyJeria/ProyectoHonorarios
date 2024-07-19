@@ -10,20 +10,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class VistaAprovadorComponent {
   nombreUserSecion: string = "";
-  
-  UserArray : any[] = [];
-
-  rut: number = 0;
-  DV: string = "";
-  nombre: string = "";
-  apellido1: string = "";
-  apellido2 : string = "";
-  nombre_usuario: string = "";
-  correo: string = "";
-  clave: string = "";
-  id_tipo_usuario: number = 0;
-
-  currentUsuarioID = "";
 
   CeCoArray : any[] = [];
 
@@ -61,145 +47,30 @@ export class VistaAprovadorComponent {
   fechaBoleta: string = "";
   nomBoletaAdjunta: string = "";
   CeCo: number = 0;
-  nombreUser: string = "";
-  aprobacion1: number = 0;
+  nombreUser: string = "a";
+  aprobacion1: number = 1;
   aprobacion2: number = 0;
   aprobacion3: number = 0;
   aprobacion4: number = 0;
   jefatura: number = 0;
 
+  aprobacionBoleta: string = "";
+
   currentBoletaID = "";
 
   constructor(private http: HttpClient, private userService: UserService )
   {
-    this.getAllUser();
     this.getAllCeCo();
     this.getAllPrestador();
     this.getAllBoletas();
   }
 
   ngOnInit(): void {
-    this.ocultarUserAdmin();
     this.ocultarCeco();
     this.ocultarPrestador();
     this.ocultarBoleta();
     this.nombreUserSecion = this.userService.getNombre();
-  }
-
-  saveRecords()
-  {
-    let bodyData = {
-      "rut" : this.rut,
-      "DV" : this.DV,
-      "nombre" : this.nombre,
-      "apellido1" : this.apellido1,
-      "apellido2" : this.apellido2,
-      "nombre_usuario" : this.nombre_usuario,
-      "correo" : this.correo,
-      "clave" : this.clave,
-      "id_tipo_usuario" : this.id_tipo_usuario
-    }
-
-    this.http.post("http://127.0.0.1:8000/usuario",bodyData).subscribe((resultData: any)=>
-    {
-      console.log(resultData);
-      alert("Usuario Registrado Correctamente");
-      this.getAllUser();
-    });
-  }
-
-  getAllUser()
-  {
-    this.http.get("http://127.0.0.1:8000/usuario")
-    .subscribe((resultData: any)=>
-    {
-      console.log(resultData);
-      this.UserArray = resultData;
-    });
-  }
-
-  setUpdate(data: any)
-  {
-    this.rut = data.rut;
-    this.DV = data.DV;
-    this.nombre = data.nombre;
-    this.apellido1 = data.apellido1;
-    this.apellido2 = data.apellido2;
-    this.nombre_usuario = data.nombre_usuario;
-    this.correo = data.correo;
-    this.clave = data.clave;
-    this.id_tipo_usuario = data.id_tipo_usuario;
-
-  }
-
-  UpdateRecords()
-  {
-    let bodyData = 
-    {
-      "rut" : this.rut,
-      "DV" : this.DV,
-      "nombre" : this.nombre,
-      "apellido1" : this.apellido1,
-      "apellido2" : this.apellido2,
-      "nombre_usuario" : this.nombre_usuario,
-      "correo" : this.correo,
-      "clave" : this.clave,
-      "id_tipo_usuario" : this.id_tipo_usuario
-    };
-
-    this.http.put("http://127.0.0.1:8000/usuario"+ this.rut , bodyData).subscribe((resultData: any)=>
-    {
-      console.log(resultData);
-      alert("Usuario Registered Updated")
-      this.DV = '';
-      this.nombre ="";
-      this.apellido1 = "";
-      this.apellido2 = "";
-      this.nombre_usuario = "";
-      this.correo = "";
-      this.clave = "";
-      this.id_tipo_usuario = 0;
-
-      this.getAllUser();
-    });
-  }
-
-  setDelete(data: any)
-  {
-    this.http.delete("http://127.0.0.1:8000/usuario"+ "/"+ data.rut).subscribe((resultData: any)=>
-    {
-      console.log(resultData);
-      alert("Usuario Eliminado")
-      this.getAllUser();
-    });
-  }
-
-  ocultarUserAdmin()
-  {
-    const navElement = document.getElementById('divUser');
-    if (navElement) {
-      navElement.style.display = 'none';
-    }
-    const navElement2 = document.getElementById('divUser2');
-    if (navElement2) {
-      navElement2.style.display = 'none';
-    }
-  }
-
-  mostrarUserAdmin()
-  {
-    const navElement = document.getElementById('divUser');
-    if (navElement) {
-      navElement.style.display = 'block';
-    }
-    const navElement2 = document.getElementById('divUser2');
-    if (navElement2) {
-      navElement2.style.display = 'block';
-    }
-
-    this.ocultarCeco()
-    this.ocultarPrestador();
-    this.ocultarBoleta();
+    this.ocultarAprovacion();
   }
 
   ocultarCeco()
@@ -224,10 +95,9 @@ export class VistaAprovadorComponent {
     if (navElement2) {
       navElement2.style.display = 'block';
     }
-
-    this.ocultarUserAdmin();
     this.ocultarPrestador();
     this.ocultarBoleta();
+    this.ocultarAprovacion();
   }
 
   saveRecordsPrestador()
@@ -273,6 +143,7 @@ export class VistaAprovadorComponent {
     this.id_banco = data.id_banco;
     this.tipo_cuenta = data.tipo_cuenta;
     this.numero_cuenta = data.numero_cuenta;
+    this.currentPrestadorID = data.id;
     
   }
 
@@ -291,7 +162,7 @@ export class VistaAprovadorComponent {
       "numero_cuenta" : this.numero_cuenta,
     };
 
-    this.http.put("http://127.0.0.1:8000/prestadorservicios"+ this.rutPrestador , bodyData).subscribe((resultData: any)=>
+    this.http.put("http://127.0.0.1:8000/prestadorservicios"+ this.currentPrestadorID , bodyData).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Prestador de Servicios Registered Updated")
@@ -310,7 +181,7 @@ export class VistaAprovadorComponent {
 
   setDeletePrestador(data: any)
   {
-    this.http.delete("http://127.0.0.1:8000/prestadorservicios"+ "/"+ data.rutPrestador).subscribe((resultData: any)=>
+    this.http.delete("http://127.0.0.1:8000/prestadorservicios"+ "/"+ data.id).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Prestador de Servicios Eliminado")
@@ -351,6 +222,8 @@ export class VistaAprovadorComponent {
     this.nombre_CeCo = data.nombre_CeCo;
     this.fecha_inicio = data.fecha_inicio;
     this.fecha_fin = data.fecha_fin;
+
+    this.currentCeCoID =data.id;
   }
 
   UpdateRecordsCeCo()
@@ -363,7 +236,7 @@ export class VistaAprovadorComponent {
       "fecha_fin" : this.fecha_fin,
     };
 
-    this.http.put("http://127.0.0.1:8000/ceco"+ this.num_CeCo , bodyData).subscribe((resultData: any)=>
+    this.http.put("http://127.0.0.1:8000/ceco"+ this.currentCeCoID , bodyData).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Centro de Costo Registered Updated")
@@ -377,7 +250,7 @@ export class VistaAprovadorComponent {
 
   setDeleteCeCo(data: any)
   {
-    this.http.delete("http://127.0.0.1:8000/ceco"+ "/"+ data.num_CeCo).subscribe((resultData: any)=>
+    this.http.delete("http://127.0.0.1:8000/ceco"+ "/"+ data.id).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Centro de Costo Eliminado")
@@ -409,8 +282,8 @@ export class VistaAprovadorComponent {
     }
 
     this.ocultarCeco();
-    this.ocultarUserAdmin();
     this.ocultarBoleta();
+    this.ocultarAprovacion();
   }
 
   saveRecordsBoleta()
@@ -470,6 +343,7 @@ export class VistaAprovadorComponent {
     this.aprobacion3 = data.aprobacion3;
     this.aprobacion4 = data.aprobacion4;
     this.jefatura = data.jefatura;
+    this.currentBoletaID = data.id;
 
   }
 
@@ -495,7 +369,7 @@ export class VistaAprovadorComponent {
       "jefatura" : this.jefatura
     };
 
-    this.http.put("http://127.0.0.1:8000/boleta"+ this.numBoleta , bodyData).subscribe((resultData: any)=>
+    this.http.put("http://127.0.0.1:8000/boleta/"+ this.currentBoletaID , bodyData).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Boleta Registered Updated")
@@ -510,7 +384,7 @@ export class VistaAprovadorComponent {
       this.nomBoletaAdjunta = "";
       this.CeCo = 0;
       this.nombreUser = ""
-      this.aprobacion1 = 0;
+      this.aprobacion1 = 1;
       this.aprobacion2 = 0;
       this.aprobacion3 = 0;
       this.aprobacion4 = 0;
@@ -522,7 +396,7 @@ export class VistaAprovadorComponent {
 
   setDeleteBoleta(data: any)
   {
-    this.http.delete("http://127.0.0.1:8000/boleta"+ "/"+ data.rutPrest).subscribe((resultData: any)=>
+    this.http.delete("http://127.0.0.1:8000/boleta"+ "/"+ data.id).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Boleta Eliminado")
@@ -552,10 +426,9 @@ export class VistaAprovadorComponent {
     if (navElement2) {
       navElement2.style.display = 'block';
     }
-
-    this.ocultarUserAdmin()
     this.ocultarPrestador();
     this.ocultarCeco();
+    this.ocultarAprovacion();
   }
 
   getBankName(id: number): string{
@@ -615,4 +488,139 @@ export class VistaAprovadorComponent {
     }
     return this.nombre_banco;
   }
+
+  ocultarAprovacion()
+  {
+    const navElement = document.getElementById('divAprovacion');
+    if (navElement) {
+      navElement.style.display = 'none';
+    }
+  }
+
+  mostrarAprovacion()
+  {
+    const navElement = document.getElementById('divAprovacion');
+    if (navElement) {
+      navElement.style.display = 'block';
+    }
+    this.ocultarPrestador();
+    this.ocultarCeco();
+    this.ocultarBoleta();
+  }
+
+  estadoAprobacion(aprobacion1: number): string{
+    switch(aprobacion1){
+      case 0:
+        this.aprobacionBoleta = "Ingresada"
+        break;
+      case 1:
+        this.aprobacionBoleta = "Aprobada"
+        break;
+      case 2:
+        this.aprobacionBoleta = "Rechasada"
+        break;
+    }
+    return this.aprobacionBoleta;
+  }
+
+  aprobarBoleta(data: any){
+
+    this.setUpdateBoleta(data);
+
+    let bodyData = 
+    {
+      "rutPrest" : this.rutPrest,
+      "DVPrest" : this.DVPrest,
+      "nombrePrest" : this.nombrePrest,
+      "id_bancoPrest" : this.id_bancoPrest,
+      "numero_cuentaPrest" : this.numero_cuentaPrest,
+      "correoPrest" : this.correoPrest,
+      "numBoleta" : this.numBoleta,
+      "fechaBoleta" : this.fechaBoleta,
+      "nomBoletaAdjunta" : this.nomBoletaAdjunta,
+      "CeCo" : this.CeCo,
+      "nombreUser" : this.nombreUser,
+      "aprobacion1" : 1,
+      "aprobacion2" : this.aprobacion2,
+      "aprobacion3" : this.aprobacion3,
+      "aprobacion4" : this.aprobacion4,
+      "jefatura" : this.jefatura
+    };
+
+    this.http.put("http://127.0.0.1:8000/boleta/"+ this.currentBoletaID , bodyData).subscribe((resultData: any)=>
+    {
+      console.log(resultData);
+      alert("Boleta Aprobada")
+
+      this.rutPrest = 0;
+      this.DVPrest = "";
+      this.nombrePrest = "";
+      this.id_bancoPrest = 0;
+      this.numero_cuentaPrest = 0;
+      this.correoPrest = "";
+      this.fechaBoleta = "";
+      this.nomBoletaAdjunta = "";
+      this.CeCo = 0;
+      this.nombreUser = ""
+      this.aprobacion1 = 1;
+      this.aprobacion2 = 0;
+      this.aprobacion3 = 0;
+      this.aprobacion4 = 0;
+      this.jefatura = 0;
+
+      this.getAllBoletas();
+    });
+  }
+
+  RechazadaBoleta(data: any){
+
+    this.setUpdateBoleta(data);
+
+    let bodyData = 
+    {
+      "rutPrest" : this.rutPrest,
+      "DVPrest" : this.DVPrest,
+      "nombrePrest" : this.nombrePrest,
+      "id_bancoPrest" : this.id_bancoPrest,
+      "numero_cuentaPrest" : this.numero_cuentaPrest,
+      "correoPrest" : this.correoPrest,
+      "numBoleta" : this.numBoleta,
+      "fechaBoleta" : this.fechaBoleta,
+      "nomBoletaAdjunta" : this.nomBoletaAdjunta,
+      "CeCo" : this.CeCo,
+      "nombreUser" : this.nombreUser,
+      "aprobacion1" : 2,
+      "aprobacion2" : this.aprobacion2,
+      "aprobacion3" : this.aprobacion3,
+      "aprobacion4" : this.aprobacion4,
+      "jefatura" : this.jefatura
+    };
+
+    this.http.put("http://127.0.0.1:8000/boleta/"+ this.currentBoletaID , bodyData).subscribe((resultData: any)=>
+    {
+      console.log(resultData);
+      alert("Boleta Rechazada")
+
+      this.rutPrest = 0;
+      this.DVPrest = "";
+      this.nombrePrest = "";
+      this.id_bancoPrest = 0;
+      this.numero_cuentaPrest = 0;
+      this.correoPrest = "";
+      this.fechaBoleta = "";
+      this.nomBoletaAdjunta = "";
+      this.CeCo = 0;
+      this.nombreUser = ""
+      this.aprobacion1 = 2;
+      this.aprobacion2 = 0;
+      this.aprobacion3 = 0;
+      this.aprobacion4 = 0;
+      this.jefatura = 0;
+
+      this.getAllBoletas();
+    });
+  }
+
+  
+
 }

@@ -39,6 +39,12 @@
                   Gestion de Boletas
                 </button>
               </li>
+              <li class="nav-item">
+                <button class="nav-link" (click)="mostrarRechazada()">
+                  <span data-feather="users"></span>
+                  Boletas Rechazadas
+                </button>
+              </li>
             </ul>
           </div>
         </nav>
@@ -351,6 +357,46 @@
                         </tr>
                     </tbody>
       
+                </table>
+            </div>
+          </div>
+
+          <div id="divRechazado">
+            <div>
+                <h1>Lista de Boletas Recibidas</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Rut</th>
+                            <th scope="col">Nombre Prestador</th>
+                            <th scope="col">Banco</th>
+                            <th scope="col">Numero de Cuenta</th>
+                            <th scope="col">Correo Electronico</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Boleta adjunta</th>
+                            <th scope="col">Centro de Costo</th>
+                            <th scope="col">Nombre Usuario</th>
+                            <th scope="col">Estado Boleta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let BoletaItem of BoletaRechazadaArray">
+      
+                            <td>{{BoletaItem.rutPrest}}-{{BoletaItem.DVPrest}}</td>
+                            <td>{{BoletaItem.nombrePrest}}</td>
+                            <td>{{BoletaItem.id_bancoPrest}}</td>
+                            <td>{{BoletaItem.numero_cuentaPrest}}</td>
+                            <td>{{BoletaItem.correoPrest}}</td>
+                            <td>{{BoletaItem.fechaBoleta}}</td>
+                            <td>{{BoletaItem.nomBoletaAdjunta}}</td>
+                            <td>{{BoletaItem.CeCo}}</td>
+                            <td>{{BoletaItem.nombreUser}}</td>
+                            <td>{{estadoAprobacion(BoletaItem.aprobacion1)}}</td>
+                            <td>
+                                <button type="button" class="btn btn-success" (click)="solucionarBoleta(BoletaItem)">Solucionar</button>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
           </div>

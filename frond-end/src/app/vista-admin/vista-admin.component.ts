@@ -61,12 +61,12 @@ export class VistaAdminComponent {
   fechaBoleta: string = "";
   nomBoletaAdjunta: string = "";
   CeCo: number = 0;
-  nombreUser: string = "";
-  aprobacion1: number = 0;
-  aprobacion2: number = 0;
-  aprobacion3: number = 0;
-  aprobacion4: number = 0;
-  jefatura: number = 0;
+  nombreUser: string = "a";
+  aprobacion1: number = 1;
+  aprobacion2: number = 1;
+  aprobacion3: number = 1;
+  aprobacion4: number = 1;
+  jefatura: number = 1;
 
   currentBoletaID = "";
 
@@ -128,6 +128,7 @@ export class VistaAdminComponent {
     this.correo = data.correo;
     this.clave = data.clave;
     this.id_tipo_usuario = data.id_tipo_usuario;
+    this.currentUsuarioID = data.id;
 
   }
 
@@ -146,7 +147,7 @@ export class VistaAdminComponent {
       "id_tipo_usuario" : this.id_tipo_usuario
     };
 
-    this.http.put("http://127.0.0.1:8000/usuario"+ this.rut , bodyData).subscribe((resultData: any)=>
+    this.http.put("http://127.0.0.1:8000/usuario"+ this.currentUsuarioID , bodyData).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Usuario Registered Updated")
@@ -165,7 +166,7 @@ export class VistaAdminComponent {
 
   setDelete(data: any)
   {
-    this.http.delete("http://127.0.0.1:8000/usuario"+ "/"+ data.rut).subscribe((resultData: any)=>
+    this.http.delete("http://127.0.0.1:8000/usuario"+ "/"+ data.id).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Usuario Eliminado")
@@ -272,6 +273,7 @@ export class VistaAdminComponent {
     this.id_banco = data.id_banco;
     this.tipo_cuenta = data.tipo_cuenta;
     this.numero_cuenta = data.numero_cuenta;
+    this.currentPrestadorID = data.id;
     
   }
 
@@ -290,7 +292,7 @@ export class VistaAdminComponent {
       "numero_cuenta" : this.numero_cuenta,
     };
 
-    this.http.put("http://127.0.0.1:8000/prestadorservicios"+ this.rutPrestador , bodyData).subscribe((resultData: any)=>
+    this.http.put("http://127.0.0.1:8000/prestadorservicios"+ this.currentPrestadorID , bodyData).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Prestador de Servicios Registered Updated")
@@ -309,7 +311,7 @@ export class VistaAdminComponent {
 
   setDeletePrestador(data: any)
   {
-    this.http.delete("http://127.0.0.1:8000/prestadorservicios"+ "/"+ data.rutPrestador).subscribe((resultData: any)=>
+    this.http.delete("http://127.0.0.1:8000/prestadorservicios"+ "/"+ data.id).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Prestador de Servicios Eliminado")
@@ -350,6 +352,7 @@ export class VistaAdminComponent {
     this.nombre_CeCo = data.nombre_CeCo;
     this.fecha_inicio = data.fecha_inicio;
     this.fecha_fin = data.fecha_fin;
+    this.currentCeCoID = data.id;
   }
 
   UpdateRecordsCeCo()
@@ -362,7 +365,7 @@ export class VistaAdminComponent {
       "fecha_fin" : this.fecha_fin,
     };
 
-    this.http.put("http://127.0.0.1:8000/ceco"+ this.num_CeCo , bodyData).subscribe((resultData: any)=>
+    this.http.put("http://127.0.0.1:8000/ceco"+ this.currentCeCoID , bodyData).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Centro de Costo Registered Updated")
@@ -376,7 +379,7 @@ export class VistaAdminComponent {
 
   setDeleteCeCo(data: any)
   {
-    this.http.delete("http://127.0.0.1:8000/ceco"+ "/"+ data.num_CeCo).subscribe((resultData: any)=>
+    this.http.delete("http://127.0.0.1:8000/ceco"+ "/"+ data.id).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Centro de Costo Eliminado")
@@ -424,13 +427,7 @@ export class VistaAdminComponent {
       "numBoleta" : this.numBoleta,
       "fechaBoleta" : this.fechaBoleta,
       "nomBoletaAdjunta" : this.nomBoletaAdjunta,
-      "CeCo" : this.CeCo,
-      "nombreUser" : this.nombreUser,
-      "aprobacion1" : this.aprobacion1,
-      "aprobacion2" : this.aprobacion2,
-      "aprobacion3" : this.aprobacion3,
-      "aprobacion4" : this.aprobacion4,
-      "jefatura" : this.jefatura
+      "CeCo" : this.CeCo
     }
 
     this.http.post("http://127.0.0.1:8000/boleta",bodyData).subscribe((resultData: any)=>
@@ -469,6 +466,7 @@ export class VistaAdminComponent {
     this.aprobacion3 = data.aprobacion3;
     this.aprobacion4 = data.aprobacion4;
     this.jefatura = data.jefatura;
+    this.currentBoletaID = data.id;
 
   }
 
@@ -494,7 +492,7 @@ export class VistaAdminComponent {
       "jefatura" : this.jefatura
     };
 
-    this.http.put("http://127.0.0.1:8000/boleta"+ this.numBoleta , bodyData).subscribe((resultData: any)=>
+    this.http.put("http://127.0.0.1:8000/boleta"+ this.currentBoletaID , bodyData).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Boleta Registered Updated")
@@ -509,10 +507,10 @@ export class VistaAdminComponent {
       this.nomBoletaAdjunta = "";
       this.CeCo = 0;
       this.nombreUser = ""
-      this.aprobacion1 = 0;
-      this.aprobacion2 = 0;
-      this.aprobacion3 = 0;
-      this.aprobacion4 = 0;
+      this.aprobacion1 = 1;
+      this.aprobacion2 = 1;
+      this.aprobacion3 = 1;
+      this.aprobacion4 = 1;
       this.jefatura = 0;
 
       this.getAllBoletas();
@@ -521,7 +519,7 @@ export class VistaAdminComponent {
 
   setDeleteBoleta(data: any)
   {
-    this.http.delete("http://127.0.0.1:8000/boleta"+ "/"+ data.rutPrest).subscribe((resultData: any)=>
+    this.http.delete("http://127.0.0.1:8000/boleta"+ "/"+ data.id).subscribe((resultData: any)=>
     {
       console.log(resultData);
       alert("Boleta Eliminado")
